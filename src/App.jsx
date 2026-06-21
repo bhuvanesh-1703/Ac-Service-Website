@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
-import Appliance3DBackground from "./components/canvas/Appliance3DBackground";
 import HeroSection from "./components/sections/HeroSection";
+import StatsSection from "./components/sections/StatsSection";
 import ServicesSection from "./components/sections/ServicesSection";
 import WhyChooseUsSection from "./components/sections/WhyChooseUsSection";
 import ServiceProcessSection from "./components/sections/ServiceProcessSection";
-import StatsSection from "./components/sections/StatsSection";
 import TestimonialsSection from "./components/sections/TestimonialsSection";
 import ContactSection from "./components/sections/ContactSection";
 import { FiArrowUp } from "react-icons/fi";
 import { AnimatePresence, motion } from "framer-motion";
 
 function App() {
-  const [hoveredIndex, setHoveredIndex] = useState(null);
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
@@ -32,34 +30,32 @@ function App() {
   };
 
   return (
-    <div className="relative min-h-screen text-slate-100 selection:bg-sky-500 selection:text-white overflow-x-hidden font-sans">
-      {/* 3D Background scene canvas */}
-      <Appliance3DBackground hoveredIndex={hoveredIndex} />
-
-      {/* Header Layout */}
+    <div className="relative min-h-screen bg-bg-ivory text-text-dark selection:bg-primary-maroon selection:text-white overflow-x-hidden font-sans">
+      
+      {/* 1. Header Navigation */}
       <Navbar />
 
-      {/* Page Content layout */}
-      <main className="relative w-full z-10">
+      {/* 2. Page Content Sections */}
+      <main className="relative w-full">
         <HeroSection />
         
-        <ServicesSection setHoveredIndex={setHoveredIndex} />
+        <StatsSection />
+        
+        <ServicesSection />
         
         <WhyChooseUsSection />
         
         <ServiceProcessSection />
-        
-        <StatsSection />
         
         <TestimonialsSection />
         
         <ContactSection />
       </main>
 
-      {/* Footer Layout */}
+      {/* 3. Footer Layout */}
       <Footer />
 
-      {/* Scroll to top floating button */}
+      {/* 4. Scroll to top floating button */}
       <AnimatePresence>
         {showScrollTop && (
           <motion.button
@@ -68,11 +64,11 @@ function App() {
             exit={{ opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.2 }}
             onClick={scrollToTop}
-            className="fixed bottom-8 right-8 z-50 w-12 h-12 bg-sky-550/90 hover:bg-sky-500 text-white rounded-full border border-sky-400/20 shadow-lg shadow-sky-500/20 flex items-center justify-center cursor-pointer transform hover:-translate-y-1 transition-all duration-200 focus:outline-none"
+            className="fixed bottom-8 right-8 z-50 w-12 h-12 bg-primary-maroon hover:bg-primary-maroon-dark text-white rounded-full border border-primary-maroon-dark/20 shadow-xl flex items-center justify-center cursor-pointer transform hover:-translate-y-1 transition-all duration-200 focus:outline-none"
             aria-label="Scroll to top"
             id="btn-scroll-to-top"
           >
-            <FiArrowUp className="w-5 h-5 font-bold" />
+            <FiArrowUp className="w-5 h-5 font-extrabold text-secondary-yellow" />
           </motion.button>
         )}
       </AnimatePresence>
