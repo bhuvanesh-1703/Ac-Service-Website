@@ -1,16 +1,35 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Outlet,useLocation } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import Home from "./components/pages/Home";
 import NotFound from "./components/pages/NotFound";
 import JoinTeam from "./components/pages/JoinTeam";
 import AiChat from "./components/chat/AiChat";
+import AdminDashboard from "./Admin/AdminDashboard";
 import { FiArrowUp } from "react-icons/fi";
 import { AnimatePresence, motion } from "framer-motion";
+import Adminlogin from "./Admin/Adminlogin";
+
+// Customer Layout wrapping public pages
+
+const MainLayout = () => {
+  return (
+    <>
+      <Navbar />
+      <Outlet />
+      <Footer />
+      <AiChat />
+    </>
+  );
+};
 
 function App() {
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [admin, setAdmin] = useState(false);
+
+  const isAdmin=localStorage.getItem("token")&&location.pathname===`/admin`;
+  
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,20 +50,18 @@ function App() {
     <BrowserRouter>
       <div className="relative min-h-screen bg-bg-ivory text-text-dark selection:bg-primary-maroon selection:text-white overflow-x-hidden font-sans">
         
-        {/* 1. Header Navigation */}
-        <Navbar />
-
-        {/* 2. Page Routing */}
+        {/* Page Routing */}
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/join-our-team" element={<JoinTeam />} />
-          <Route path="*" element={<NotFound />} />
+          <Route element={<MainLayout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/join-our-team" element={<JoinTeam />} />
+            <Route path="*" element={<NotFound />} />
+          </Route>
+          <Route path='/login' element={<Adminlogin/>}/>
+          <Route path="/admin" element={<AdminDashboard onLogout={() => window.location.href = "/"} />} />
         </Routes>
 
-        {/* 3. Footer Layout */}
-        <Footer />
-
-        {/* 4. Scroll to top floating button */}
+        {/* Scroll to top floating button */}
         <AnimatePresence>
           {showScrollTop && (
             <motion.button
@@ -62,8 +79,6 @@ function App() {
           )}
         </AnimatePresence>
 
-        {/* 5. WhatsApp AI Chatbot Widget */}
-        <AiChat />
       </div>
     </BrowserRouter>
   );

@@ -25,3 +25,6 @@ dist-ssr
 favicon.svg
 icons.svg
 eslint.config.js
+.env
+*.env
+.env.*

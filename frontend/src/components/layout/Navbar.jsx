@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiMenu, FiX, FiPhoneCall } from "react-icons/fi";
+import { link } from "../../../../backend/routes/bookingRoute";
 
 const navItems = [
   { name: "Services", href: "#services" },
@@ -31,6 +32,8 @@ const Navbar = () => {
       targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
+
+  const isAdmin=localStorage.getItem("token")
 
   return (
     <>
@@ -74,6 +77,11 @@ const Navbar = () => {
           </nav>
 
           {/* Action CTAs */}
+
+          { isAdmin? <Link to="/admin" className="hidden md:flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-secondary-yellow bg-white/10 hover:bg-white/15 px-4 py-2.5 rounded-xl border border-secondary-yellow/20 transition-all">
+             <FiPhoneCall className="w-3.5 h-3.5" />
+             Admin Dashboard
+          </Link> :
           <div className="hidden md:flex items-center gap-4">
             <Link
               to="/join-our-team"
@@ -89,7 +97,7 @@ const Navbar = () => {
             >
               Book Service
             </a>
-          </div>
+          </div>}
 
           {/* Hamburger Menu Toggle */}
           <button
