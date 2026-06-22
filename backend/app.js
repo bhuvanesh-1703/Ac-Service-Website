@@ -5,6 +5,7 @@ const express = require('express')
 const cors = require('cors')
 const connectDB=require('./DB/db_connection')
 const aiRouter=require('./Routes/aiRoute')
+const careerRouter=require('./Routes/careerRoute')
 
 
 const app=express()
@@ -16,6 +17,7 @@ connectDB()
 
 //Router
 app.use('/api/ai',aiRouter)
+app.use('/api/careers',careerRouter)
 
 const PORT=process.env.PORT || 4000
 

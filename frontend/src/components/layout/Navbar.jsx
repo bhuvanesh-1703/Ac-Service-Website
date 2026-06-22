@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiMenu, FiX, FiPhoneCall } from "react-icons/fi";
 
@@ -74,13 +75,13 @@ const Navbar = () => {
 
           {/* Action CTAs */}
           <div className="hidden md:flex items-center gap-4">
-            <a
-              href="tel:+916374009568"
+            <Link
+              to="/join-our-team"
               className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-secondary-yellow bg-white/10 hover:bg-white/15 px-4 py-2.5 rounded-xl border border-secondary-yellow/20 transition-all"
             >
               <FiPhoneCall className="w-3.5 h-3.5" />
-              <span>+91 63740 09568</span>
-            </a>
+              <span>Join Our Team</span>
+            </Link>
             <a
               href="#contact"
               onClick={(e) => handleScrollToSection(e, "#contact")}
@@ -125,13 +126,14 @@ const Navbar = () => {
             </div>
 
             <div className="flex flex-col gap-3 mt-8 pb-16">
-              <a
-                href="tel:+916374009568"
+              <Link
+                to="/join-our-team"
+                onClick={() => setIsOpen(false)}
                 className="flex items-center justify-center gap-3 text-sm font-bold text-secondary-yellow bg-white/10 border border-secondary-yellow/20 px-4 py-3.5 rounded-xl uppercase tracking-wider"
               >
                 <FiPhoneCall className="w-4 h-4" />
-                <span>Call +91 63740 09568</span>
-              </a>
+                <span>Join Our Team</span>
+              </Link>
               <a
                 href="#contact"
                 onClick={(e) => handleScrollToSection(e, "#contact")}
