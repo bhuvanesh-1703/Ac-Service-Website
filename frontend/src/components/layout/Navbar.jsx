@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiMenu, FiX, FiPhoneCall } from "react-icons/fi";
-import { link } from "../../../../backend/routes/bookingRoute";
+
 
 const navItems = [
   { name: "Services", href: "#services" },

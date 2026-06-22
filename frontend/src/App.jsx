@@ -9,7 +9,7 @@ import AiChat from "./components/chat/AiChat";
 import AdminDashboard from "./Admin/AdminDashboard";
 import { FiArrowUp } from "react-icons/fi";
 import { AnimatePresence, motion } from "framer-motion";
-import Adminlogin from "./Admin/Adminlogin";
+import Adminlogin from "./Admin/Validation/Login";
 
 // Customer Layout wrapping public pages
 
