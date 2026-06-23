@@ -1,35 +1,34 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route, Outlet,useLocation } from "react-router-dom";
-import Navbar from "./components/layout/Navbar";
-import Footer from "./components/layout/Footer";
-import Home from "./components/pages/Home";
-import NotFound from "./components/pages/NotFound";
-import JoinTeam from "./components/pages/JoinTeam";
+import { Routes, Route, useLocation } from "react-router-dom";
+
+// Layout components
+import Navbar from "./Layout/Navbar";
+import Footer from "./Layout/Footer";
+
+// Public Pages
+import Home from "./pages/Home";
+import NotFound from "./pages/NotFound";
+import JoinTeam from "./pages/JoinTeam";
+import Login from "./validation/Login";
+import Register from "./validation/Register";
+
+// Chat component
 import AiChat from "./components/chat/AiChat";
-import AdminDashboard from "./Admin/AdminDashboard";
+
+// Admin Layout & Pages
+import AdminLayout from "./Layout/AdminLayout";
+import DashboardOverview from "./admin/DashboardOverview";
+import BookingsTable from "./admin/BookingsTable";
+import JobApplicationsTable from "./admin/JobApplicationsTable";
+import ProductTable from "./admin/ProductTable";
+import SettingsView from "./admin/SettingsView";
+
 import { FiArrowUp } from "react-icons/fi";
 import { AnimatePresence, motion } from "framer-motion";
-import Adminlogin from "./Admin/Validation/Login";
-
-// Customer Layout wrapping public pages
-
-const MainLayout = () => {
-  return (
-    <>
-      <Navbar />
-      <Outlet />
-      <Footer />
-      <AiChat />
-    </>
-  );
-};
 
 function App() {
   const [showScrollTop, setShowScrollTop] = useState(false);
-  const [admin, setAdmin] = useState(false);
-
-  const isAdmin=localStorage.getItem("token")&&location.pathname===`/admin`;
-  
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,41 +45,55 @@ function App() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const isAdminRoute = location.pathname.startsWith("/admin");
+
   return (
-    <BrowserRouter>
-      <div className="relative min-h-screen bg-bg-ivory text-text-dark selection:bg-primary-maroon selection:text-white overflow-x-hidden font-sans">
-        
-        {/* Page Routing */}
+    <div className="relative min-h-screen bg-bg-ivory text-text-dark selection:bg-primary-maroon selection:text-white overflow-x-hidden font-sans">
+      
+      {!isAdminRoute && <Navbar />}
+
+      <main>
         <Routes>
-          <Route element={<MainLayout />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/join-our-team" element={<JoinTeam />} />
-            <Route path="*" element={<NotFound />} />
-          </Route>
+          {/* Public Customer Routes */}
+          <Route path="/" element={<Home />} />
+          <Route path="/join-our-team" element={<JoinTeam />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="*" element={<NotFound />} />
           
-          <Route path="/admin" element={<AdminDashboard onLogout={() => { localStorage.clear(); window.location.href = "/"; }} />} />
+          {/* Protected Admin Routes */}
+          <Route path="/admin" element={<AdminLayout onLogout={() => { localStorage.clear(); window.location.href = "/"; }} />}>
+            <Route index element={<DashboardOverview />} />
+            <Route path="bookings" element={<BookingsTable />} />
+            <Route path="applications" element={<JobApplicationsTable />} />
+            <Route path="products" element={<ProductTable />} />
+            <Route path="settings" element={<SettingsView />} />
+          </Route>
         </Routes>
+      </main>
 
-        {/* Scroll to top floating button */}
-        <AnimatePresence>
-          {showScrollTop && (
-            <motion.button
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.8 }}
-              transition={{ duration: 0.2 }}
-              onClick={scrollToTop}
-              className="fixed bottom-24 right-7 z-50 w-12 h-12 bg-primary-maroon hover:bg-primary-maroon-dark text-white rounded-full border border-primary-maroon-dark/20 shadow-xl flex items-center justify-center cursor-pointer transform hover:-translate-y-1 transition-all duration-200 focus:outline-none"
-              aria-label="Scroll to top"
-              id="btn-scroll-to-top"
-            >
-              <FiArrowUp className="w-5 h-5 font-extrabold text-secondary-yellow" />
-            </motion.button>
-          )}
-        </AnimatePresence>
+      {!isAdminRoute && <Footer />}
+      {!isAdminRoute && <AiChat />}
 
-      </div>
-    </BrowserRouter>
+      {/* Scroll to top floating button */}
+      <AnimatePresence>
+        {showScrollTop && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.2 }}
+            onClick={scrollToTop}
+            className="fixed bottom-24 right-7 z-50 w-12 h-12 bg-primary-maroon hover:bg-primary-maroon-dark text-white rounded-full border border-primary-maroon-dark/20 shadow-xl flex items-center justify-center cursor-pointer transform hover:-translate-y-1 transition-all duration-200 focus:outline-none"
+            aria-label="Scroll to top"
+            id="btn-scroll-to-top"
+          >
+            <FiArrowUp className="w-5 h-5 font-extrabold text-secondary-yellow" />
+          </motion.button>
+        )}
+      </AnimatePresence>
+
+    </div>
   );
 }
 

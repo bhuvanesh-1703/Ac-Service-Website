@@ -333,24 +333,6 @@ const AiChat = () => {
               <div ref={messagesEndRef} />
             </div>
 
-            {/* C. QUICK / STARTER QUESTIONS PANEL (ONLY IF LAST MESSAGE IS AI AND CHAT NOT CURRENTLY LOADING) */}
-            {/* {chatHistory.length > 0 && chatHistory[chatHistory.length - 1].role === 'model' && !loading && (
-              <div className="px-4 py-2 space-y-1.5 bg-black/5 border-t border-black/5 relative z-10">
-                <p className="text-[11px] text-gray-600 font-semibold mb-1 uppercase tracking-wider select-none">Quick Queries</p>
-                <div className="flex flex-wrap gap-1.5 max-h-24 overflow-y-auto pb-1">
-                  {STARTER_QUESTIONS.map((question, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => handleStarterQuestionClick(question)}
-                      className="bg-white hover:bg-[#d9fdd3] active:bg-[#c2fad0] text-gray-800 hover:text-green-800 text-[12px] font-medium px-2.5 py-1.5 rounded-full border border-gray-200/80 shadow-sm transition-all cursor-pointer select-none text-left"
-                    >
-                      {question}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )} */}
-
             {/* D. FOOTER INPUT PANEL */}
             <form
               onSubmit={handleFormSubmit}

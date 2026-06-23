@@ -1,13 +1,17 @@
 import React from "react";
 import { FiGrid, FiUsers, FiBriefcase, FiSettings, FiLogOut, FiCalendar } from "react-icons/fi";
+import { useNavigate, useLocation } from "react-router-dom";
 
-const Sidebar = ({ activeTab, setActiveTab, onLogout }) => {
+const Sidebar = ({ onLogout }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const menuItems = [
-    { id: "dashboard", label: "Dashboard", icon: FiGrid },
-    { id: "bookings", label: "Service Bookings", icon: FiCalendar },
-    { id: "applications", label: "Job Applications", icon: FiUsers },
-    { id: "products", label: "Services Catalog", icon: FiBriefcase },
-    { id: "settings", label: "Settings", icon: FiSettings },
+    { id: "dashboard", path: "/admin", label: "Dashboard", icon: FiGrid },
+    { id: "bookings", path: "/admin/bookings", label: "Service Bookings", icon: FiCalendar },
+    { id: "applications", path: "/admin/applications", label: "Job Applications", icon: FiUsers },
+    { id: "products", path: "/admin/products", label: "Services Catalog", icon: FiBriefcase },
+    { id: "settings", path: "/admin/settings", label: "Settings", icon: FiSettings },
   ];
 
   return (
@@ -25,11 +29,17 @@ const Sidebar = ({ activeTab, setActiveTab, onLogout }) => {
         <nav className="px-4 py-8 space-y-2">
           {menuItems.map((item) => {
             const Icon = item.icon;
-            const isActive = activeTab === item.id;
+            
+            // Check if current path matches the item path
+            // For dashboard, we match exactly "/admin" or "/admin/"
+            const isActive = item.path === "/admin" 
+              ? location.pathname === "/admin" || location.pathname === "/admin/"
+              : location.pathname.startsWith(item.path);
+
             return (
               <button
                 key={item.id}
-                onClick={() => setActiveTab(item.id)}
+                onClick={() => navigate(item.path)}
                 className={`w-full flex items-center gap-4 px-4 py-3 rounded-xl text-xs font-bold transition-all duration-200 cursor-pointer ${
                   isActive
                     ? "bg-secondary-yellow text-primary-maroon shadow-md shadow-black/10"

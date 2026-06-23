@@ -149,11 +149,11 @@ const SavingsCalculatorSection = () => {
         <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-4">
           
           {/* Card: Power saved */}
-          <div className="bg-white p-6 rounded-2xl border border-border-subtle shadow-sm flex flex-col justify-between">
+          <div className="bg-white h-90 p-6 rounded-2xl border border-border-subtle shadow-sm flex flex-col justify-between">
             <div className="w-10 h-10 rounded-xl bg-amber-50 border border-amber-200/50 flex items-center justify-center text-amber-500 mb-4">
               <FiZap className="w-5 h-5 fill-amber-50" />
             </div>
-            <div>
+            <div className="pb-12">
               <span className="text-[10px] text-text-dark/45 font-bold uppercase tracking-wider block">Power Saved</span>
               <h4 className="text-2xl font-extrabold text-text-dark tracking-tight mt-1">
                 {powerSavedKWh.toLocaleString()} <span className="text-xs font-semibold text-text-dark/55">kWh / year</span>
@@ -180,48 +180,9 @@ const SavingsCalculatorSection = () => {
             </div>
           </div>
 
-          {/* Card: CO2 emissions reduced */}
-          <div className="bg-white p-6 rounded-2xl border border-border-subtle shadow-sm flex flex-col justify-between">
-            <div className="w-10 h-10 rounded-xl bg-green-50 border border-green-200/50 flex items-center justify-center text-green-600 mb-4">
-              <FaLeaf className="w-4 h-4" />
-            </div>
-            <div>
-              <span className="text-[10px] text-text-dark/45 font-bold uppercase tracking-wider block">CO2 Saved</span>
-              <h4 className="text-2xl font-extrabold text-text-dark tracking-tight mt-1">
-                {co2SavedKg.toLocaleString()} <span className="text-xs font-semibold text-text-dark/55">kg CO2</span>
-              </h4>
-              <p className="text-[10px] text-text-dark/50 leading-relaxed font-light mt-1.5">
-                Reduces carbon footprint, helping the environment and energy grid.
-              </p>
-            </div>
-          </div>
+          
 
-          {/* Card: AC lifespan extended */}
-          <div className="bg-white p-6 rounded-2xl border border-border-subtle shadow-sm flex flex-col justify-between">
-            <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-200/50 flex items-center justify-center text-blue-500 mb-4">
-              <FiClock className="w-5 h-5" />
-            </div>
-            <div>
-              <span className="text-[10px] text-text-dark/45 font-bold uppercase tracking-wider block">Lifespan Extension</span>
-              <h4 className="text-2xl font-extrabold text-text-dark tracking-tight mt-1">
-                +{lifespanYears} <span className="text-xs font-semibold text-text-dark/55">Years</span>
-              </h4>
-              <p className="text-[10px] text-text-dark/50 leading-relaxed font-light mt-1.5">
-                Regular service keeps parts running cool, preventing compressor burnout.
-              </p>
-            </div>
-          </div>
-
-          {/* Call-to-action button */}
-          <div className="md:col-span-2 mt-2">
-            <a
-              href="#contact"
-              className="w-full bg-primary-maroon hover:bg-primary-maroon-dark text-white font-extrabold text-xs uppercase tracking-wider py-4 rounded-xl shadow-md text-center block transition-all"
-            >
-              Book Professional Maintenance Service
-            </a>
-          </div>
-
+        
         </div>
 
       </div>

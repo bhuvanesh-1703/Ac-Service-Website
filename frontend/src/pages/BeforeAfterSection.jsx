@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 
 // Import images
-import filterBefore from "../../assets/showcase_filter_before.png";
-import filterAfter from "../../assets/showcase_filter_after.png";
-import coilsBefore from "../../assets/showcase_coils_before.png";
-import coilsAfter from "../../assets/showcase_coils_after.png";
-import wiringBefore from "../../assets/showcase_wiring_before.png";
-import wiringAfter from "../../assets/showcase_wiring_after.png";
+import filterBefore from "../assets/showcase_filter_before.png";
+import filterAfter from "../assets/showcase_filter_after.png";
+import coilsBefore from "../assets/showcase_coils_before.png";
+import coilsAfter from "../assets/showcase_coils_after.png";
+import wiringBefore from "../assets/showcase_wiring_before.png";
+import wiringAfter from "../assets/showcase_wiring_after.png";
 
 const BeforeAfterSection = () => {
   // Simple state to track which case is selected: "filter", "coils", or "wiring"

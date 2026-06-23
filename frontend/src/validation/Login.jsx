@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
 import { Mail, Lock, LogIn, ShieldAlert, Sparkles } from "lucide-react";
-import API_URL from "../../Config/config";
+import API_URL from "../Config/config";
 
 const Login = () => {
   const navigate = useNavigate();

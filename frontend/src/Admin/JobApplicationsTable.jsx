@@ -69,10 +69,6 @@ const JobApplicationsTable = () => {
   const getStatusColor = (status) => {
     if (status === "pending") {
       return "bg-amber-100 text-amber-800 border-amber-200";
-    } else if (status === "reviewed") {
-      return "bg-blue-100 text-blue-800 border-blue-200";
-    } else if (status === "contacted") {
-      return "bg-purple-100 text-purple-800 border-purple-200";
     } else if (status === "rejected") {
       return "bg-rose-100 text-rose-800 border-rose-200";
     } else if (status === "hired") {
@@ -103,21 +99,10 @@ const JobApplicationsTable = () => {
         {/* Status Filters */}
         <div className="flex flex-wrap items-center gap-2 w-full md:w-auto">
           <span className="text-xs text-text-dark/70 font-bold flex items-center gap-1.5 mr-2">
-            <FiFilter /> Status:
+            <FiFilter /> 
           </span>
-          {["All", "pending", "reviewed", "contacted", "rejected", "hired"].map((status) => (
-            <button
-              key={status}
-              onClick={() => setStatusFilter(status)}
-              className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer capitalize ${
-                statusFilter === status
-                  ? "bg-primary-maroon text-white"
-                  : "bg-bg-ivory text-text-dark border border-border-subtle hover:bg-gray-100"
-              }`}
-            >
-              {status}
-            </button>
-          ))}
+         
+       
         </div>
 
       </div>
@@ -247,21 +232,6 @@ const JobApplicationsTable = () => {
               <div className="pt-4 border-t border-border-subtle space-y-3">
                 <h4 className="font-extrabold text-text-dark/70 uppercase tracking-wider text-[10px]">Review Actions</h4>
                 
-                <div className="grid grid-cols-2 gap-2">
-                  <button
-                    onClick={() => handleStatusUpdate(selectedApp._id, "reviewed")}
-                    className="flex items-center justify-center gap-1.5 py-2.5 bg-bg-ivory hover:bg-gray-100 text-text-dark border border-border-subtle font-bold text-xs rounded-xl cursor-pointer transition-colors"
-                  >
-                    Reviewed
-                  </button>
-                  <button
-                    onClick={() => handleStatusUpdate(selectedApp._id, "contacted")}
-                    className="flex items-center justify-center gap-1.5 py-2.5 bg-bg-ivory hover:bg-gray-100 text-text-dark border border-border-subtle font-bold text-xs rounded-xl cursor-pointer transition-colors"
-                  >
-                    Contacted
-                  </button>
-                </div>
-
                 <div className="grid grid-cols-2 gap-2">
                   <button
                     onClick={() => handleStatusUpdate(selectedApp._id, "hired")}

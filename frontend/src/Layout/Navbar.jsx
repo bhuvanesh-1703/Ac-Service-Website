@@ -8,7 +8,7 @@ const navItems = [
   { name: "Services", href: "#services" },
   { name: "Why Us", href: "#why-choose-us" },
   { name: "Process", href: "#process" },
-  { name: "Reviews", href: "#testimonials" },
+  
   { name: "Book Now", href: "#contact" },
 ];
 
