@@ -57,8 +57,8 @@ function App() {
             <Route path="/join-our-team" element={<JoinTeam />} />
             <Route path="*" element={<NotFound />} />
           </Route>
-          <Route path='/login' element={<Adminlogin/>}/>
-          <Route path="/admin" element={<AdminDashboard onLogout={() => window.location.href = "/"} />} />
+          
+          <Route path="/admin" element={<AdminDashboard onLogout={() => { localStorage.clear(); window.location.href = "/"; }} />} />
         </Routes>
 
         {/* Scroll to top floating button */}

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import axios from "axios";
 import { FiUser, FiPhone, FiMapPin, FiMessageSquare, FiSettings, FiCheckCircle, FiClock, FiShield } from "react-icons/fi";
 
 const ContactSection = () => {
@@ -14,6 +15,7 @@ const ContactSection = () => {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   const servicesList = [
     "Air Conditioner Service & Repair",
@@ -49,22 +51,39 @@ const ContactSection = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setSubmitError("");
     if (!validate()) return;
 
     setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitted(true);
-      setFormData({
-        name: "",
-        phone: "",
-        serviceType: "",
-        address: "",
-        message: "",
+    try {
+      const problemText = formData.serviceType + (formData.message ? ` - ${formData.message}` : "");
+      const res = await axios.post("http://localhost:5100/api/bookings", {
+        name: formData.name,
+        phone: formData.phone,
+        address: formData.address,
+        problem: problemText,
       });
-    }, 1200);
+
+      if (res.data && res.data.success) {
+        setSubmitted(true);
+        setFormData({
+          name: "",
+          phone: "",
+          serviceType: "",
+          address: "",
+          message: "",
+        });
+      } else {
+        throw new Error(res.data.error || "Failed to submit booking.");
+      }
+    } catch (err) {
+      console.error("Booking submit error:", err);
+      setSubmitError(err.response?.data?.error || err.message || "An error occurred. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -151,6 +170,11 @@ const ContactSection = () => {
         {/* Right: Booking Form */}
         <div className="lg:col-span-7">
           <div className="crm-card p-8 md:p-10 bg-white relative overflow-hidden">
+            {submitError && (
+              <div className="mb-5 p-4 bg-red-50 border border-red-200 rounded-2xl text-xs font-semibold text-red-700">
+                ⚠️ {submitError}
+              </div>
+            )}
             <form onSubmit={handleSubmit} className="space-y-5">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 {/* Name */}

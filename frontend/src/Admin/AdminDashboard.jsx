@@ -6,8 +6,13 @@ import ProductTable from "./ProductTable";
 import JobApplicationsTable from "./JobApplicationsTable";
 import BookingsTable from "./BookingsTable";
 import { FiUsers, FiCheckCircle, FiClock, FiShield, FiBriefcase, FiCalendar } from "react-icons/fi";
+import Adminlogin from "./Validation/Login";
 
 const AdminDashboard = ({ onLogout }) => {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    return <Adminlogin />;
+  }
   const [activeTab, setActiveTab] = useState("dashboard");
   const [stats, setStats] = useState({
     total: 0,

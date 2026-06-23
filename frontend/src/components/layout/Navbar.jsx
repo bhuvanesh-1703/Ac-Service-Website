@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { FiMenu, FiX, FiPhoneCall } from "react-icons/fi";
+import { FiMenu, FiX, FiPhoneCall, FiShield } from "react-icons/fi";
 
 
 const navItems = [
@@ -15,6 +15,7 @@ const navItems = [
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,7 +34,7 @@ const Navbar = () => {
     }
   };
 
-  const isAdmin=localStorage.getItem("token")
+  const isAdmin = !!localStorage.getItem("token");
 
   return (
     <>
@@ -79,7 +80,7 @@ const Navbar = () => {
           {/* Action CTAs */}
 
           { isAdmin? <Link to="/admin" className="hidden md:flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-secondary-yellow bg-white/10 hover:bg-white/15 px-4 py-2.5 rounded-xl border border-secondary-yellow/20 transition-all">
-             <FiPhoneCall className="w-3.5 h-3.5" />
+             <FiShield className="w-3.5 h-3.5" />
              Admin Dashboard
           </Link> :
           <div className="hidden md:flex items-center gap-4">
@@ -134,21 +135,34 @@ const Navbar = () => {
             </div>
 
             <div className="flex flex-col gap-3 mt-8 pb-16">
-              <Link
-                to="/join-our-team"
-                onClick={() => setIsOpen(false)}
-                className="flex items-center justify-center gap-3 text-sm font-bold text-secondary-yellow bg-white/10 border border-secondary-yellow/20 px-4 py-3.5 rounded-xl uppercase tracking-wider"
-              >
-                <FiPhoneCall className="w-4 h-4" />
-                <span>Join Our Team</span>
-              </Link>
-              <a
-                href="#contact"
-                onClick={(e) => handleScrollToSection(e, "#contact")}
-                className="bg-secondary-yellow text-primary-maroon text-center font-bold text-sm uppercase tracking-wider py-3.5 rounded-xl shadow-md shadow-black/10 cursor-pointer"
-              >
-                Book a Service
-              </a>
+              {isAdmin ? (
+                <Link
+                  to="/admin"
+                  onClick={() => setIsOpen(false)}
+                  className="flex items-center justify-center gap-3 text-sm font-bold text-secondary-yellow bg-white/10 border border-secondary-yellow/20 px-4 py-3.5 rounded-xl uppercase tracking-wider"
+                >
+                  <FiShield className="w-4 h-4" />
+                  <span>Admin Dashboard</span>
+                </Link>
+              ) : (
+                <>
+                  <Link
+                    to="/join-our-team"
+                    onClick={() => setIsOpen(false)}
+                    className="flex items-center justify-center gap-3 text-sm font-bold text-secondary-yellow bg-white/10 border border-secondary-yellow/20 px-4 py-3.5 rounded-xl uppercase tracking-wider"
+                  >
+                    <FiPhoneCall className="w-4 h-4" />
+                    <span>Join Our Team</span>
+                  </Link>
+                  <a
+                    href="#contact"
+                    onClick={(e) => handleScrollToSection(e, "#contact")}
+                    className="bg-secondary-yellow text-primary-maroon text-center font-bold text-sm uppercase tracking-wider py-3.5 rounded-xl shadow-md shadow-black/10 cursor-pointer"
+                  >
+                    Book a Service
+                  </a>
+                </>
+              )}
             </div>
           </motion.div>
         )}

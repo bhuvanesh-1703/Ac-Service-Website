@@ -43,7 +43,7 @@ const Login = () => {
       localStorage.setItem("isLoggedIn", "true");
 
       swal("Welcome back!", "Login successful. Redirecting to dashboard...", "success");
-      navigate("/admin");
+      window.location.href = "/admin";
     } catch (err) {
       setLoading(false);
       console.error(err);
