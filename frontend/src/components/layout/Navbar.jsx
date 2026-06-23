@@ -34,7 +34,7 @@ const Navbar = () => {
     }
   };
 
-  const isAdmin = !!localStorage.getItem("token");
+  const isAdmin = !!localStorage.getItem("token") && localStorage.getItem("role") === "admin";
 
   return (
     <>

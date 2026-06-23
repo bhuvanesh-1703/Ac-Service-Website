@@ -7,6 +7,8 @@ const connectDB=require('./DB/db_connection')
 const aiRouter=require('./Routes/aiRoute')
 const careerRouter=require('./Routes/careerRoute')
 const bookingRouter=require('./routes/bookingRoute')
+const authRouter=require("./routes/authRouter")
+
 
 
 const app=express()
@@ -20,6 +22,7 @@ connectDB()
 app.use('/api/ai',aiRouter)
 app.use('/api/careers',careerRouter)
 app.use('/api/bookings',bookingRouter)
+app.use('api/auth',authRouter)
 
 const PORT=process.env.PORT || 4000
 
