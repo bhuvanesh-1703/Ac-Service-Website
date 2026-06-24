@@ -12,8 +12,9 @@ import JoinTeam from "./pages/JoinTeam";
 import Login from "./validation/Login";
 import Register from "./validation/Register";
 
-// Chat component
+// Chat components
 import AiChat from "./components/chat/AiChat";
+import WhatsAppChat from "./components/chat/WhatsAppChat.jsx";
 
 // Admin Layout & Pages
 import AdminLayout from "./Layout/AdminLayout.jsx";
@@ -83,6 +84,7 @@ function App() {
 
       {!isAdminRoute && <Footer />}
       {!isAdminRoute && <AiChat />}
+      {!isAdminRoute && <WhatsAppChat />}
 
       {/* Scroll to top floating button */}
       <AnimatePresence>
