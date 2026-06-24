@@ -28,3 +28,4 @@ eslint.config.js
 .env
 *.env
 .env.*
+.vercel
