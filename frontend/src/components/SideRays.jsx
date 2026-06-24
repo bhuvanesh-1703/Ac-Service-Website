@@ -1,6 +1,5 @@
 import { useRef, useEffect, useState } from 'react';
 import { Renderer, Program, Triangle, Mesh } from 'ogl';
-import './SideRays.css';
 
 const hexToRgb = hex => {
   const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
@@ -252,7 +251,7 @@ void main() {
     u.iOpacity.value = opacity;
   }, [speed, rayColor1, rayColor2, intensity, spread, origin, tilt, saturation, blend, falloff, opacity]);
 
-  return <div ref={containerRef} className={`side-rays-container ${className}`.trim()} />;
+  return <div ref={containerRef} className={`w-full h-[90%] relative pointer-events-none z-[3] overflow-hidden ${className}`.trim()} />;
 };
 
 export default SideRays;
