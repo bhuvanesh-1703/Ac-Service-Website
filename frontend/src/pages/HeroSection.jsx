@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FiPhoneCall, FiCalendar, FiArrowRight, FiCheckCircle, FiShield } from "react-icons/fi";
-import AnimatedBackground from "./AnimatedBackground";
+import Lightfall from "../components/Lightfall";
 
 const HeroSection = () => {
   const handleScrollToSection = (e, id) => {
@@ -14,8 +14,26 @@ const HeroSection = () => {
 
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center pt-32 pb-20 overflow-hidden bg-[#050505]">
-      {/* Immersive Animated Background */}
-      <AnimatedBackground />
+      {/* Immersive Lightfall Background */}
+      <div className="absolute inset-0 z-0">
+        <Lightfall
+          colors={['#800000', '#C7A76C', '#ffebc4']}
+          backgroundColor="#050505"
+          speed={0.8}
+          streakCount={6}
+          streakWidth={1.2}
+          streakLength={1.5}
+          glow={1}
+          density={1}
+          twinkle={1.2}
+          zoom={2}
+          backgroundGlow={1}
+          opacity={0.8}
+          mouseInteraction={true}
+          mouseStrength={1}
+          mouseRadius={0.6}
+        />
+      </div>
 
       {/* Radial Glow for premium feel */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary-maroon/20 rounded-full blur-[120px] pointer-events-none" />
