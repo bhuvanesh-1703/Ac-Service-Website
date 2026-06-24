@@ -5,7 +5,7 @@ import SideRays from "../components/SideRays";
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen bg-[#020202] flex items-center justify-center pt-24 pb-12 overflow-hidden">
+    <section className="relative min-h-screen bg-transparent flex items-center justify-center pt-24 pb-12 overflow-hidden">
       
       {/* Ultra Subtle Atmospheric Background */}
       <div className="absolute inset-0 z-0 opacity-30 mix-blend-screen pointer-events-none">
@@ -74,7 +74,7 @@ const HeroSection = () => {
           {/* Central Circular Image Mask */}
           <motion.div 
             initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
-            className="absolute inset-24 rounded-full overflow-hidden border-[6px] border-[#020202] shadow-[0_0_100px_rgba(199,167,108,0.15)] bg-black z-20 group"
+            className="absolute inset-24 rounded-full overflow-hidden border-[6px] border-bg-ivory shadow-[0_0_100px_rgba(199,167,108,0.15)] bg-black z-20 group"
           >
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10" />
             <img src="/ac_service_hero.png" alt="AC Technician" className="w-full h-full object-cover scale-110 group-hover:scale-125 transition-transform duration-[15s] opacity-90" />

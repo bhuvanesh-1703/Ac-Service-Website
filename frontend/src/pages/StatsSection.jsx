@@ -41,7 +41,7 @@ const StatsSection = () => {
   };
 
   return (
-    <section className="py-16 bg-bg-ivory relative z-10 max-w-7xl mx-auto px-6 -mt-10">
+    <section className="py-16 relative z-10 max-w-7xl mx-auto px-6 -mt-10">
       <motion.div
         className="grid grid-cols-1 md:grid-cols-3 gap-8"
         variants={containerVariants}
