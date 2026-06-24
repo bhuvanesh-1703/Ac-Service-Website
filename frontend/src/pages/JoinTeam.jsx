@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
+import API_URL from "../Config/config";
 import { 
   FiUser, 
   FiPhone, 
@@ -79,7 +80,7 @@ const JoinTeam = () => {
     setLoading(true);
 
     try {
-      const res = await axios.post("http://localhost:5100/api/careers/apply", {
+      const res = await axios.post(`${API_URL}/api/careers/apply`, {
         fullName: formData.fullName,
         phone: formData.phone,
         email: formData.email,

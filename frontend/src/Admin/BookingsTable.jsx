@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import API_URL from "../Config/config";
 import swal from "sweetalert";
 import { FiSearch, FiFilter, FiPhone, FiMapPin, FiCalendar, FiUser, FiCheckCircle, FiXCircle, FiTrash2 } from "react-icons/fi";
 
@@ -14,8 +15,8 @@ const BookingsTable = () => {
   const fetchData = async () => {
     try {
       const [bookingsRes, techsRes] = await Promise.all([
-        axios.get("http://localhost:5100/api/bookings"),
-        axios.get("http://localhost:5100/api/careers")
+        axios.get(`${API_URL}/api/bookings`),
+        axios.get(`${API_URL}/api/careers`)
       ]);
 
       setBookings(bookingsRes.data.bookings);
@@ -54,7 +55,7 @@ const BookingsTable = () => {
   const updateBooking = async (id, updates) => {
     try {
       await axios.patch(
-        `http://localhost:5100/api/bookings/${id}`,
+        `${API_URL}/api/bookings/${id}`,
         updates
       );
       swal({
@@ -86,7 +87,7 @@ const BookingsTable = () => {
 
     if (confirm) {
       try {
-        await axios.delete(`http://localhost:5100/api/bookings/${id}`);
+        await axios.delete(`${API_URL}/api/bookings/${id}`);
         swal({
           title: "Deleted!",
           text: "Booking has been deleted.",

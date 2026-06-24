@@ -46,6 +46,6 @@ app.use('/api/auth',authRouter)
 
 const PORT=process.env.PORT || 5100
 
-app.listen(PORT,()=>{
+httpServer.listen(PORT,()=>{
     console.log(`SERVER IS RUNNING ON PORT ${PORT}`)
 })

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import API_URL from "../Config/config";
 import { FiSearch, FiFilter, FiPhone, FiMail, FiCalendar, FiBriefcase, FiCheck, FiX, FiCheckCircle } from "react-icons/fi";
 
 const SPECIALIZATIONS_MAP = {
@@ -21,7 +22,7 @@ const JobApplicationsTable = () => {
     setLoading(true);
     setError("");
     try {
-      const res = await axios.get("http://localhost:5100/api/careers");
+      const res = await axios.get(`${API_URL}/api/careers`);
       if (res.data && res.data.success) {
         setApplications(res.data.applications);
         if (res.data.applications.length > 0) {
@@ -42,7 +43,7 @@ const JobApplicationsTable = () => {
 
   const handleStatusUpdate = async (id, newStatus) => {
     try {
-      const res = await axios.patch(`http://localhost:5100/api/careers/${id}/status`, {
+      const res = await axios.patch(`${API_URL}/api/careers/${id}/status`, {
         status: newStatus
       });
       if (res.data && res.data.success) {

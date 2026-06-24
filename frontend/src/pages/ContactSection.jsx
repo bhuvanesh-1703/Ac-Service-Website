@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
+import API_URL from "../Config/config";
 import {
   FiUser,
   FiPhone,
@@ -70,7 +71,7 @@ const ContactSection = () => {
       const problemText =
         formData.serviceType +
         (formData.message ? ` - ${formData.message}` : "");
-      const res = await axios.post("http://localhost:5100/api/bookings", {
+      const res = await axios.post(`${API_URL}/api/bookings`, {
         name: formData.name,
         phone: formData.phone,
         address: formData.address,

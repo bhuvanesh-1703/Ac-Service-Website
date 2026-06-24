@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
+import API_URL from "../../Config/config";
 import {
   FaWhatsapp,
   FaPaperPlane,
@@ -119,7 +120,7 @@ const AiChat = () => {
         parts: msg.parts.map((part) => ({ text: part.text })),
       }));
 
-      const res = await axios.post("http://localhost:5100/api/ai/chat", {
+      const res = await axios.post(`${API_URL}/api/ai/chat`, {
         message: textToSend,
         history: formattedHistory,
       });

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import API_URL from "../Config/config";
 import { FiUsers, FiCheckCircle, FiClock, FiShield, FiCalendar } from "react-icons/fi";
 import socket from "../socket";
 
@@ -24,8 +25,8 @@ const DashboardOverview = () => {
       setLoading(true);
       
       const [careersRes, bookingsRes] = await Promise.all([
-        axios.get("http://localhost:5100/api/careers"),
-        axios.get("http://localhost:5100/api/bookings"),
+        axios.get(`${API_URL}/api/careers`),
+        axios.get(`${API_URL}/api/bookings`),
       ]);
 
       const applications = careersRes.data?.applications || [];
