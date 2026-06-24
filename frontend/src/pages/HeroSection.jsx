@@ -1,7 +1,13 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FiPhoneCall, FiCalendar, FiArrowRight, FiCheckCircle, FiShield } from "react-icons/fi";
-import Lightfall from "../components/Lightfall";
+import {
+  FiPhoneCall,
+  FiCalendar,
+  FiArrowRight,
+  FiCheckCircle,
+  FiShield,
+} from "react-icons/fi";
+import SideRays from "../components/SideRays";
 
 const HeroSection = () => {
   const handleScrollToSection = (e, id) => {
@@ -14,24 +20,20 @@ const HeroSection = () => {
 
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center pt-32 pb-20 overflow-hidden bg-[#050505]">
-      {/* Immersive Lightfall Background */}
+      {/* Immersive SideRays Background */}
       <div className="absolute inset-0 z-0">
-        <Lightfall
-          colors={['#800000', '#C7A76C', '#ffebc4']}
-          backgroundColor="#050505"
-          speed={0.8}
-          streakCount={6}
-          streakWidth={1.2}
-          streakLength={1.5}
-          glow={1}
-          density={1}
-          twinkle={1.2}
-          zoom={2}
-          backgroundGlow={1}
+        <SideRays
+          speed={2.0}
+          rayColor1="#C7A76C"
+          rayColor2="#800000"
+          intensity={2}
+          spread={2.5}
+          origin="top-left"
+          tilt={-10}
+          saturation={1.5}
+          blend={0.5}
+          falloff={1.6}
           opacity={0.8}
-          mouseInteraction={true}
-          mouseStrength={1}
-          mouseRadius={0.6}
         />
       </div>
 
@@ -39,7 +41,6 @@ const HeroSection = () => {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary-maroon/20 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 w-full relative z-10 flex flex-col items-center text-center">
-        
         {/* Premium Pill Badge */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -76,7 +77,9 @@ const HeroSection = () => {
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
           className="text-base sm:text-xl text-white/60 font-light max-w-3xl mb-12 leading-relaxed"
         >
-          Expert repairs for your AC, refrigerator, and home appliances. Backed by verified engineers, transparent upfront pricing, and our signature 90-day warranty.
+          Expert repairs for your AC, refrigerator, and home appliances. Backed
+          by verified engineers, transparent upfront pricing, and our signature
+          90-day warranty.
         </motion.p>
 
         {/* Sleek Call to Actions */}
@@ -92,7 +95,8 @@ const HeroSection = () => {
             className="group relative flex items-center justify-center gap-3 px-10 py-5 bg-white text-black rounded-full font-bold text-sm uppercase tracking-widest overflow-hidden transition-transform hover:scale-105 shadow-2xl"
           >
             <span className="relative z-10 flex items-center gap-2">
-              Book Service <FiArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              Book Service{" "}
+              <FiArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </span>
           </a>
           <a
@@ -118,7 +122,9 @@ const HeroSection = () => {
           ].map((item, idx) => (
             <div key={idx} className="flex items-center gap-3 text-white/70">
               <item.icon className="w-5 h-5 text-secondary-yellow" />
-              <span className="text-sm font-semibold tracking-wider uppercase">{item.text}</span>
+              <span className="text-sm font-semibold tracking-wider uppercase">
+                {item.text}
+              </span>
             </div>
           ))}
         </motion.div>
