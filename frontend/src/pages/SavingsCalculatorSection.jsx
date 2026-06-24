@@ -3,17 +3,17 @@ import { FiZap, FiDollarSign, FiClock } from "react-icons/fi";
 import { FaLeaf } from "react-icons/fa";
 
 const SavingsCalculatorSection = () => {
-  // Simple state variables for calculator settings
-  const [acUnits, setAcUnits] = useState(2); // Number of AC units (1 to 5)
+
+  const [acUnits, setAcUnits] = useState(1); 
   const [dailyHours, setDailyHours] = useState(8); // Daily run-time hours (2 to 24)
   const [usageMonths, setUsageMonths] = useState(6); // Months of usage per year (1 to 12)
   const [isFiveStar, setIsFiveStar] = useState(false); // true if 5-star AC (efficient), false if 3-star AC (standard)
 
   // Calculations:
   // 1. Determine hourly power consumption of the AC (in kW)
-  let hourlyKW = 1.5; // standard 3-star AC uses ~1.5 kW
+  let hourlyKW = 1.5; 
   if (isFiveStar) {
-    hourlyKW = 1.0; // efficient 5-star AC uses ~1.0 kW
+    hourlyKW = 1.0; 
   }
 
   // 2. Total active operational days per year

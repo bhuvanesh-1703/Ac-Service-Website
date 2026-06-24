@@ -68,13 +68,13 @@ const JobApplicationsTable = () => {
 
   const getStatusColor = (status) => {
     if (status === "pending") {
-      return "bg-amber-100 text-amber-800 border-amber-200";
+      return "bg-amber-500/10 text-amber-400 border-amber-500/20";
     } else if (status === "rejected") {
-      return "bg-rose-100 text-rose-800 border-rose-200";
+      return "bg-rose-500/10 text-rose-400 border-rose-500/20";
     } else if (status === "hired") {
-      return "bg-green-100 text-green-800 border-green-200";
+      return "bg-green-500/10 text-green-400 border-green-500/20";
     } else {
-      return "bg-gray-100 text-gray-800 border-gray-200";
+      return "bg-gray-500/10 text-gray-400 border-gray-500/20";
     }
   };
 
@@ -82,7 +82,7 @@ const JobApplicationsTable = () => {
     <div className="space-y-6 font-sans">
       
       {/* Search and Filters */}
-      <div className="bg-white p-5 rounded-2xl border border-border-subtle shadow-sm flex flex-col md:flex-row gap-4 items-center justify-between">
+      <div className="bg-card-bg p-5 rounded-2xl border border-border-subtle shadow-sm flex flex-col md:flex-row gap-4 items-center justify-between">
         
         {/* Search */}
         <div className="relative w-full md:max-w-xs">
@@ -123,7 +123,7 @@ const JobApplicationsTable = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
           
           {/* Applications List */}
-          <div className="bg-white rounded-3xl border border-border-subtle shadow-md overflow-hidden lg:col-span-2">
+          <div className="bg-card-bg rounded-3xl border border-border-subtle shadow-md overflow-hidden lg:col-span-2">
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-border-subtle">
                 <thead className="bg-bg-ivory/70 text-left text-xs font-bold text-text-dark/75 uppercase tracking-wider">
@@ -183,7 +183,7 @@ const JobApplicationsTable = () => {
 
           {/* Details Card Panel */}
           {selectedApp && (
-            <div className="bg-white rounded-3xl border border-border-subtle shadow-md p-6 space-y-6">
+            <div className="bg-card-bg rounded-3xl border border-border-subtle shadow-md p-6 space-y-6">
               <div className="text-center space-y-2 border-b border-border-subtle pb-6">
                 <div className="h-16 w-16 mx-auto rounded-full bg-primary-maroon text-secondary-yellow flex items-center justify-center font-extrabold text-lg shadow-md border-2 border-secondary-yellow">
                   {selectedApp.fullName.substring(0, 2).toUpperCase()}

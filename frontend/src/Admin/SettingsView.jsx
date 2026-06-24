@@ -2,7 +2,7 @@ import React from "react";
 
 const SettingsView = () => {
   return (
-    <div className="bg-white p-6 rounded-2xl border border-border-subtle shadow-sm space-y-4">
+    <div className="bg-card-bg p-6 rounded-2xl border border-border-subtle shadow-sm space-y-4">
       <h2 className="font-extrabold text-sm text-text-dark uppercase tracking-wider">
         System Settings
       </h2>

@@ -118,7 +118,7 @@ const JoinTeam = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="bg-white border border-border-subtle rounded-3xl p-8 md:p-12 shadow-xl shadow-primary-maroon/3 relative overflow-hidden"
+          className="bg-card-bg border border-border-subtle rounded-3xl p-8 md:p-12 shadow-xl shadow-primary-maroon/3 relative overflow-hidden"
         >
           <AnimatePresence mode="wait">
             {!success ? (
@@ -256,7 +256,7 @@ const JoinTeam = () => {
                             className={`flex items-center gap-3 border rounded-2xl p-4.5 cursor-pointer transition-all select-none ${
                               isChecked
                                 ? "bg-primary-maroon/5 border-primary-maroon text-primary-maroon font-bold shadow-sm"
-                                : "bg-bg-ivory border-border-subtle hover:bg-gray-50 text-text-dark/85"
+                                : "bg-bg-ivory border-border-subtle hover:bg-primary-maroon/5 text-text-dark/85"
                             }`}
                           >
                             <input

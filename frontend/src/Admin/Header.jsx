@@ -3,7 +3,7 @@ import { FiShield } from "react-icons/fi";
 
 const Header = ({ title }) => {
   return (
-    <header className="h-20 bg-white border-b border-border-subtle flex items-center justify-between px-8 sticky top-0 z-20 shadow-sm select-none">
+    <header className="h-20 bg-card-bg border-b border-border-subtle flex items-center justify-between px-8 sticky top-0 z-20 shadow-sm select-none">
       <h1 className="text-xl font-extrabold text-text-dark tracking-tight">
         {title}
       </h1>

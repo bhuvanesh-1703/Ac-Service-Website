@@ -71,7 +71,7 @@ const BeforeAfterSection = () => {
               className={`px-4 py-2 border rounded-xl text-xs font-bold transition-all cursor-pointer ${
                 activeCase === "filter"
                   ? "bg-primary-maroon text-white border-primary-maroon"
-                  : "bg-white border-border-subtle text-text-dark/70 hover:border-text-dark"
+                  : "bg-card-bg border-border-subtle text-text-dark/70 hover:border-text-dark"
               }`}
             >
               Filter Service
@@ -84,7 +84,7 @@ const BeforeAfterSection = () => {
               className={`px-4 py-2 border rounded-xl text-xs font-bold transition-all cursor-pointer ${
                 activeCase === "coils"
                   ? "bg-primary-maroon text-white border-primary-maroon"
-                  : "bg-white border-border-subtle text-text-dark/70 hover:border-text-dark"
+                  : "bg-card-bg border-border-subtle text-text-dark/70 hover:border-text-dark"
               }`}
             >
               Coil Wash
@@ -97,7 +97,7 @@ const BeforeAfterSection = () => {
               className={`px-4 py-2 border rounded-xl text-xs font-bold transition-all cursor-pointer ${
                 activeCase === "wiring"
                   ? "bg-primary-maroon text-white border-primary-maroon"
-                  : "bg-white border-border-subtle text-text-dark/70 hover:border-text-dark"
+                  : "bg-card-bg border-border-subtle text-text-dark/70 hover:border-text-dark"
               }`}
             >
               Wiring Repair
@@ -105,7 +105,7 @@ const BeforeAfterSection = () => {
           </div>
 
           {/* Details Card */}
-          <div className="bg-white p-6 rounded-2xl border border-border-subtle shadow-sm space-y-4">
+          <div className="crm-card p-6 bg-card-bg border border-border-subtle shadow-sm space-y-4">
             <h3 className="text-lg font-extrabold text-text-dark tracking-tight">{title}</h3>
             <p className="text-xs md:text-sm text-text-dark/65 leading-relaxed font-light">{desc}</p>
             
@@ -128,7 +128,7 @@ const BeforeAfterSection = () => {
 
         {/* Right Side: Simple range overlay slider */}
         <div className="lg:col-span-7 flex justify-center">
-          <div className="relative w-full aspect-[4/3] max-w-[600px] bg-white border border-border-subtle rounded-3xl overflow-hidden shadow-md select-none">
+          <div className="relative w-full aspect-[4/3] max-w-[600px] bg-card-bg border border-border-subtle rounded-3xl overflow-hidden shadow-md select-none">
             
             {/* 1. Before Image (Background) */}
             <img

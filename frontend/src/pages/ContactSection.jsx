@@ -1,7 +1,16 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
-import { FiUser, FiPhone, FiMapPin, FiMessageSquare, FiSettings, FiCheckCircle, FiClock, FiShield } from "react-icons/fi";
+import {
+  FiUser,
+  FiPhone,
+  FiMapPin,
+  FiMessageSquare,
+  FiSettings,
+  FiCheckCircle,
+  FiClock,
+  FiShield,
+} from "react-icons/fi";
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -58,7 +67,9 @@ const ContactSection = () => {
 
     setIsSubmitting(true);
     try {
-      const problemText = formData.serviceType + (formData.message ? ` - ${formData.message}` : "");
+      const problemText =
+        formData.serviceType +
+        (formData.message ? ` - ${formData.message}` : "");
       const res = await axios.post("http://localhost:5100/api/bookings", {
         name: formData.name,
         phone: formData.phone,
@@ -80,37 +91,47 @@ const ContactSection = () => {
       }
     } catch (err) {
       console.error("Booking submit error:", err);
-      setSubmitError(err.response?.data?.error || err.message || "An error occurred. Please try again.");
+      setSubmitError(
+        err.response?.data?.error ||
+          err.message ||
+          "An error occurred. Please try again.",
+      );
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <section id="contact" className="py-24 bg-bg-ivory relative z-10 max-w-7xl mx-auto px-6">
-      
+    <section
+      id="contact"
+      className="py-24 bg-bg-ivory relative z-10 max-w-7xl mx-auto px-6"
+    >
       {/* Section Header */}
       <div className="max-w-3xl mx-auto text-center mb-16">
         <span className="inline-block text-xs font-bold uppercase tracking-wider text-primary-maroon mb-3 bg-primary-maroon/5 px-3 py-1 rounded-full border border-primary-maroon/10">
           Get In Touch
         </span>
         <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-text-dark mb-4">
-          Book Your Service <span className="text-primary-maroon">Appointment</span>
+          Book Your Service{" "}
+          <span className="text-primary-maroon">Appointment</span>
         </h2>
         <p className="text-sm sm:text-base text-text-dark/60 font-light leading-relaxed">
-          Fill out the details below, and our team will contact you immediately to schedule a technician visit.
+          Fill out the details below, and our team will contact you immediately
+          to schedule a technician visit.
         </p>
         <div className="h-1 w-12 bg-secondary-yellow mt-6 rounded-full mx-auto" />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-        
         {/* Left: Contact Info and Support cards */}
         <div className="lg:col-span-5 flex flex-col gap-6">
-          <div className="crm-card p-8 bg-white space-y-6">
-            <h3 className="text-xl font-extrabold text-text-dark tracking-tight">Need Urgent Help?</h3>
+          <div className="crm-card p-8 bg-card-bg space-y-6">
+            <h3 className="text-xl font-extrabold text-text-dark tracking-tight">
+              Need Urgent Help?
+            </h3>
             <p className="text-xs text-text-dark/60 font-light leading-relaxed">
-              If your appliance has broken down unexpectedly, do not worry. Reach out to our emergency support center for instant bookings.
+              If your appliance has broken down unexpectedly, do not worry.
+              Reach out to our emergency support center for instant bookings.
             </p>
 
             <div className="flex flex-col gap-4 mt-2">
@@ -120,8 +141,13 @@ const ContactSection = () => {
                   <FiPhone className="w-5 h-5 stroke-[2]" />
                 </div>
                 <div>
-                  <span className="text-[10px] text-text-dark/45 font-bold uppercase tracking-wider block">Call Direct</span>
-                  <a href="tel:+916374009568" className="text-text-dark font-extrabold text-sm hover:text-primary-maroon transition-colors block mt-0.5">
+                  <span className="text-[10px] text-text-dark/45 font-bold uppercase tracking-wider block">
+                    Call Direct
+                  </span>
+                  <a
+                    href="tel:+916374009568"
+                    className="text-text-dark font-extrabold text-sm hover:text-primary-maroon transition-colors block mt-0.5"
+                  >
                     +91 63740 09568
                   </a>
                 </div>
@@ -133,8 +159,12 @@ const ContactSection = () => {
                   <FiClock className="w-5 h-5 stroke-[2]" />
                 </div>
                 <div>
-                  <span className="text-[10px] text-text-dark/45 font-bold uppercase tracking-wider block">Service Hours</span>
-                  <span className="text-text-dark font-semibold text-xs block mt-0.5">Mon - Sun (8:00 AM - 9:00 PM)</span>
+                  <span className="text-[10px] text-text-dark/45 font-bold uppercase tracking-wider block">
+                    Service Hours
+                  </span>
+                  <span className="text-text-dark font-semibold text-xs block mt-0.5">
+                    Mon - Sun (8:00 AM - 9:00 PM)
+                  </span>
                 </div>
               </div>
 
@@ -144,7 +174,9 @@ const ContactSection = () => {
                   <FiMapPin className="w-5 h-5 stroke-[2]" />
                 </div>
                 <div>
-                  <span className="text-[10px] text-text-dark/45 font-bold uppercase tracking-wider block">Location</span>
+                  <span className="text-[10px] text-text-dark/45 font-bold uppercase tracking-wider block">
+                    Location
+                  </span>
                   <span className="text-text-dark/70 font-light text-xs block mt-0.5 leading-relaxed">
                     Duraisamy Puram, Rajapalayam-626117, Tamil Nadu.
                   </span>
@@ -154,14 +186,17 @@ const ContactSection = () => {
           </div>
 
           {/* Quick Notice Badge */}
-          <div className="crm-card p-6 bg-white border-l-4 border-l-secondary-yellow flex gap-4 items-start">
+          <div className="crm-card p-6 bg-card-bg border-l-4 border-l-secondary-yellow flex gap-4 items-start">
             <div className="w-9 h-9 rounded-xl bg-secondary-yellow/15 flex items-center justify-center text-primary-maroon shrink-0 mt-0.5">
               <FiShield className="w-5 h-5 stroke-[2.5]" />
             </div>
             <div>
-              <h4 className="font-extrabold text-xs text-text-dark">90-Day Warranty Service</h4>
+              <h4 className="font-extrabold text-xs text-text-dark">
+                90-Day Warranty Service
+              </h4>
               <p className="text-[11px] text-text-dark/60 font-light leading-relaxed mt-1">
-                All our replacement spare components and labor works are backed by a minimum **90-Day Service Warranty**.
+                All our replacement spare components and labor works are backed
+                by a minimum **90-Day Service Warranty**.
               </p>
             </div>
           </div>
@@ -169,7 +204,7 @@ const ContactSection = () => {
 
         {/* Right: Booking Form */}
         <div className="lg:col-span-7">
-          <div className="crm-card p-8 md:p-10 bg-white relative overflow-hidden">
+          <div className="crm-card p-8 md:p-10 bg-card-bg relative overflow-hidden">
             {submitError && (
               <div className="mb-5 p-4 bg-red-50 border border-red-200 rounded-2xl text-xs font-semibold text-red-700">
                 ⚠️ {submitError}
@@ -179,7 +214,12 @@ const ContactSection = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 {/* Name */}
                 <div className="flex flex-col gap-1.5">
-                  <label htmlFor="form-name" className="text-[10px] font-bold text-text-dark/50 uppercase tracking-wider">Full Name</label>
+                  <label
+                    htmlFor="form-name"
+                    className="text-[10px] font-bold text-text-dark/50 uppercase tracking-wider"
+                  >
+                    Full Name
+                  </label>
                   <div className="flex items-center bg-bg-ivory border border-border-subtle focus-within:border-primary-maroon/40 rounded-xl px-3 py-2.5 transition-colors">
                     <FiUser className="text-text-dark/40 mr-2.5 shrink-0 w-4 h-4" />
                     <input
@@ -192,12 +232,21 @@ const ContactSection = () => {
                       className="bg-transparent border-none outline-none text-xs w-full focus:ring-0 text-text-dark placeholder-text-dark/30"
                     />
                   </div>
-                  {errors.name && <span className="text-primary-maroon text-xs font-semibold">{errors.name}</span>}
+                  {errors.name && (
+                    <span className="text-primary-maroon text-xs font-semibold">
+                      {errors.name}
+                    </span>
+                  )}
                 </div>
 
                 {/* Phone */}
                 <div className="flex flex-col gap-1.5">
-                  <label htmlFor="form-phone" className="text-[10px] font-bold text-text-dark/50 uppercase tracking-wider">Phone Number</label>
+                  <label
+                    htmlFor="form-phone"
+                    className="text-[10px] font-bold text-text-dark/50 uppercase tracking-wider"
+                  >
+                    Phone Number
+                  </label>
                   <div className="flex items-center bg-bg-ivory border border-border-subtle focus-within:border-primary-maroon/40 rounded-xl px-3 py-2.5 transition-colors">
                     <FiPhone className="text-text-dark/40 mr-2.5 shrink-0 w-4 h-4" />
                     <input
@@ -210,13 +259,22 @@ const ContactSection = () => {
                       className="bg-transparent border-none outline-none text-xs w-full focus:ring-0 text-text-dark placeholder-text-dark/30"
                     />
                   </div>
-                  {errors.phone && <span className="text-primary-maroon text-xs font-semibold">{errors.phone}</span>}
+                  {errors.phone && (
+                    <span className="text-primary-maroon text-xs font-semibold">
+                      {errors.phone}
+                    </span>
+                  )}
                 </div>
               </div>
 
               {/* Service Type */}
               <div className="flex flex-col gap-1.5">
-                <label htmlFor="form-service" className="text-[10px] font-bold text-text-dark/50 uppercase tracking-wider">Service Required</label>
+                <label
+                  htmlFor="form-service"
+                  className="text-[10px] font-bold text-text-dark/50 uppercase tracking-wider"
+                >
+                  Service Required
+                </label>
                 <div className="flex items-center bg-bg-ivory border border-border-subtle focus-within:border-primary-maroon/40 rounded-xl px-3 py-2.5 transition-colors">
                   <FiSettings className="text-text-dark/40 mr-2.5 shrink-0 w-4 h-4" />
                   <select
@@ -226,20 +284,35 @@ const ContactSection = () => {
                     onChange={handleInputChange}
                     className="bg-transparent border-none outline-none text-xs w-full focus:ring-0 text-text-dark placeholder-text-dark/30 cursor-pointer"
                   >
-                    <option value="" disabled className="text-text-dark/35">Select Appliance Service</option>
+                    <option value="" disabled className="text-text-dark/35">
+                      Select Appliance Service
+                    </option>
                     {servicesList.map((service, idx) => (
-                      <option key={idx} value={service} className="text-text-dark">
+                      <option
+                        key={idx}
+                        value={service}
+                        className="text-text-dark"
+                      >
                         {service}
                       </option>
                     ))}
                   </select>
                 </div>
-                {errors.serviceType && <span className="text-primary-maroon text-xs font-semibold">{errors.serviceType}</span>}
+                {errors.serviceType && (
+                  <span className="text-primary-maroon text-xs font-semibold">
+                    {errors.serviceType}
+                  </span>
+                )}
               </div>
 
               {/* Address */}
               <div className="flex flex-col gap-1.5">
-                <label htmlFor="form-address" className="text-[10px] font-bold text-text-dark/50 uppercase tracking-wider">Service Address</label>
+                <label
+                  htmlFor="form-address"
+                  className="text-[10px] font-bold text-text-dark/50 uppercase tracking-wider"
+                >
+                  Service Address
+                </label>
                 <div className="flex items-start bg-bg-ivory border border-border-subtle focus-within:border-primary-maroon/40 rounded-xl px-3 py-2.5 transition-colors">
                   <FiMapPin className="text-text-dark/40 mr-2.5 mt-0.5 shrink-0 w-4 h-4" />
                   <textarea
@@ -252,12 +325,21 @@ const ContactSection = () => {
                     className="bg-transparent border-none outline-none text-xs w-full focus:ring-0 text-text-dark placeholder-text-dark/30 resize-none"
                   />
                 </div>
-                {errors.address && <span className="text-primary-maroon text-xs font-semibold">{errors.address}</span>}
+                {errors.address && (
+                  <span className="text-primary-maroon text-xs font-semibold">
+                    {errors.address}
+                  </span>
+                )}
               </div>
 
               {/* Message */}
               <div className="flex flex-col gap-1.5">
-                <label htmlFor="form-message" className="text-[10px] font-bold text-text-dark/50 uppercase tracking-wider">Additional Message (Optional)</label>
+                <label
+                  htmlFor="form-message"
+                  className="text-[10px] font-bold text-text-dark/50 uppercase tracking-wider"
+                >
+                  Additional Message (Optional)
+                </label>
                 <div className="flex items-start bg-bg-ivory border border-border-subtle focus-within:border-primary-maroon/40 rounded-xl px-3 py-2.5 transition-colors">
                   <FiMessageSquare className="text-text-dark/40 mr-2.5 mt-0.5 shrink-0 w-4 h-4" />
                   <textarea
@@ -296,7 +378,7 @@ const ContactSection = () => {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  className="absolute inset-0 bg-white/95 flex flex-col items-center justify-center text-center p-8 z-20"
+                  className="absolute inset-0 bg-bg-ivory/95 flex flex-col items-center justify-center text-center p-8 z-20"
                 >
                   <motion.div
                     initial={{ scale: 0.95, y: 15 }}
@@ -305,9 +387,13 @@ const ContactSection = () => {
                     className="flex flex-col items-center"
                   >
                     <FiCheckCircle className="w-16 h-16 text-primary-maroon mb-6 drop-shadow-md" />
-                    <h3 className="text-xl font-extrabold text-text-dark tracking-tight mb-2">Booking Confirmed!</h3>
+                    <h3 className="text-xl font-extrabold text-text-dark tracking-tight mb-2">
+                      Booking Confirmed!
+                    </h3>
                     <p className="text-xs text-text-dark/65 max-w-xs mb-8 leading-relaxed">
-                      Thank you! Your booking request has been registered. Our dispatch manager will contact you at your phone number shortly to verify.
+                      Thank you! Your booking request has been registered. Our
+                      dispatch manager will contact you at your phone number
+                      shortly to verify.
                     </p>
                     <button
                       onClick={() => setSubmitted(false)}
@@ -321,7 +407,6 @@ const ContactSection = () => {
             </AnimatePresence>
           </div>
         </div>
-
       </div>
     </section>
   );

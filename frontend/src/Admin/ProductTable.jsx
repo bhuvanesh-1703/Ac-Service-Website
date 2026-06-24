@@ -25,7 +25,7 @@ const ProductTable = () => {
     <div className="space-y-6 font-sans">
       
       {/* Search and Filters */}
-      <div className="bg-white p-5 rounded-2xl border border-border-subtle shadow-sm flex flex-col md:flex-row gap-4 items-center justify-between">
+      <div className="bg-card-bg p-5 rounded-2xl border border-border-subtle shadow-sm flex flex-col md:flex-row gap-4 items-center justify-between">
         
         {/* Search */}
         <div className="relative w-full md:max-w-xs">
@@ -62,7 +62,7 @@ const ProductTable = () => {
       </div>
 
       {/* Services Table Card */}
-      <div className="bg-white rounded-3xl border border-border-subtle shadow-md overflow-hidden">
+      <div className="bg-card-bg rounded-3xl border border-border-subtle shadow-md overflow-hidden">
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-border-subtle">
             <thead className="bg-bg-ivory/70 text-left text-xs font-bold text-text-dark/75 uppercase tracking-wider">
@@ -103,7 +103,7 @@ const ProductTable = () => {
                   </td>
                   {/* Status */}
                   <td className="px-6 py-4.5">
-                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-green-100 text-green-800 border border-green-200">
+                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-green-500/10 text-green-400 border border-green-500/20">
                       {service.status}
                     </span>
                   </td>

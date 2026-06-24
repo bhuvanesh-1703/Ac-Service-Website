@@ -5,7 +5,7 @@ import ServicesSection from "./ServicesSection";
 import WhyChooseUsSection from "./WhyChooseUsSection";
 import ServiceProcessSection from "./ServiceProcessSection";
 import BeforeAfterSection from "./BeforeAfterSection";
-import SavingsCalculatorSection from "./SavingsCalculatorSection";
+import TestimonialSection from "./TestimonialSection";
 import ContactSection from "./ContactSection";
 
 const Home = () => {
@@ -17,7 +17,7 @@ const Home = () => {
       <WhyChooseUsSection />
       <ServiceProcessSection />
       <BeforeAfterSection />
-      <SavingsCalculatorSection />
+      <TestimonialSection />
       <ContactSection />
     </main>
   );

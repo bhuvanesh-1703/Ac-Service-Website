@@ -79,7 +79,7 @@ const WhyChooseUsSection = () => {
           return (
             <motion.div
               key={index}
-              className="crm-card p-6 md:p-8 bg-white hover:border-primary-maroon/20 transition-all duration-300 group"
+              className="crm-card p-6 md:p-8 bg-card-bg hover:border-primary-maroon/20 transition-all duration-300 group"
               variants={cardVariants}
             >
               {/* Icon Frame */}

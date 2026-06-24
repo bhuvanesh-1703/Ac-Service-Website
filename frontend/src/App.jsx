@@ -49,7 +49,6 @@ function App() {
 
   return (
     <div className="relative min-h-screen bg-bg-ivory text-text-dark selection:bg-primary-maroon selection:text-white overflow-x-hidden font-sans">
-      
       {!isAdminRoute && <Navbar />}
 
       <main>
@@ -60,9 +59,19 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="*" element={<NotFound />} />
-          
+
           {/* Protected Admin Routes */}
-          <Route path="/admin" element={<AdminLayout onLogout={() => { localStorage.clear(); window.location.href = "/"; }} />}>
+          <Route
+            path="/admin"
+            element={
+              <AdminLayout
+                onLogout={() => {
+                  localStorage.clear();
+                  window.location.href = "/";
+                }}
+              />
+            }
+          >
             <Route index element={<DashboardOverview />} />
             <Route path="bookings" element={<BookingsTable />} />
             <Route path="applications" element={<JobApplicationsTable />} />
@@ -92,7 +101,6 @@ function App() {
           </motion.button>
         )}
       </AnimatePresence>
-
     </div>
   );
 }

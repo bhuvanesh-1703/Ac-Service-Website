@@ -10,7 +10,7 @@ const NotFound = () => {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="max-w-md w-full bg-white border border-border-subtle rounded-2xl p-8 text-center shadow-xl shadow-primary-maroon/5 flex flex-col items-center"
+        className="max-w-md w-full bg-card-bg border border-border-subtle rounded-2xl p-8 text-center shadow-xl shadow-primary-maroon/5 flex flex-col items-center"
       >
         {/* Animated Warning Icon */}
         <motion.div

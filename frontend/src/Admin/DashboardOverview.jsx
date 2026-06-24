@@ -70,7 +70,7 @@ const DashboardOverview = () => {
       </div>
 
       {/* Welcome Banner */}
-      <div className="bg-white p-8 rounded-3xl shadow-md border border-border-subtle">
+      <div className="bg-card-bg p-8 rounded-3xl shadow-md border border-border-subtle">
         <h3 className="font-extrabold flex items-center gap-2 text-text-dark text-base tracking-tight">
           <FiShield className="text-primary-maroon" /> Welcome Administrator
         </h3>
@@ -85,7 +85,7 @@ const DashboardOverview = () => {
 // Reusable StatCard Component
 const StatCard = ({ title, value, icon }) => {
   return (
-    <div className="bg-white p-6 rounded-2xl border border-border-subtle shadow-sm flex items-center gap-4 hover:shadow-md transition-all duration-200">
+    <div className="bg-card-bg p-6 rounded-2xl border border-border-subtle shadow-sm flex items-center gap-4 hover:shadow-md transition-all duration-200">
       <div className="w-12 h-12 rounded-xl bg-primary-maroon/5 flex items-center justify-center text-primary-maroon text-xl font-bold">
         {icon}
       </div>
