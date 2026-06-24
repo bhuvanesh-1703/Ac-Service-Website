@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import swal from "sweetalert";
-import { FiSearch, FiFilter, FiPhone, FiMapPin, FiCalendar, FiUser, FiCheckCircle, FiXCircle } from "react-icons/fi";
+import { FiSearch, FiFilter, FiPhone, FiMapPin, FiCalendar, FiUser, FiCheckCircle, FiXCircle, FiTrash2 } from "react-icons/fi";
 
 const BookingsTable = () => {
   const [bookings, setBookings] = useState([]);
@@ -72,6 +72,40 @@ const BookingsTable = () => {
         icon:"error",
         button:"OK",
       });
+    }
+  };
+
+  const deleteBooking = async (id) => {
+    const confirm = await swal({
+      title: "Are you sure?",
+      text: "This booking will be permanently deleted!",
+      icon: "warning",
+      buttons: ["Cancel", "Delete"],
+      dangerMode: true,
+    });
+
+    if (confirm) {
+      try {
+        await axios.delete(`http://localhost:5100/api/bookings/${id}`);
+        swal({
+          title: "Deleted!",
+          text: "Booking has been deleted.",
+          icon: "success",
+          button: "OK",
+        });
+        if (selectedBooking && selectedBooking._id === id) {
+          setSelectedBooking(null);
+        }
+        fetchData();
+      } catch (error) {
+        console.log(error);
+        swal({
+          title: "Error!",
+          text: "Failed to delete booking.",
+          icon: "error",
+          button: "OK",
+        });
+      }
     }
   };
 
@@ -253,6 +287,13 @@ const BookingsTable = () => {
                   }
                 >
                   <FiXCircle /> Cancel
+                </button>
+
+                <button
+                  className="flex-1 flex items-center justify-center gap-1.5 py-2.5 bg-gray-800 hover:bg-gray-900 text-white font-bold text-xs rounded-xl cursor-pointer transition-colors shadow-sm"
+                  onClick={() => deleteBooking(selectedBooking._id)}
+                >
+                  <FiTrash2 /> Delete
                 </button>
               </div>
             </div>

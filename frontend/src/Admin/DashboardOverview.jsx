@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { FiUsers, FiCheckCircle, FiClock, FiShield, FiCalendar } from "react-icons/fi";
+import socket from "../socket";
 
 const DashboardOverview = () => {
   // State for statistics
@@ -46,7 +47,24 @@ const DashboardOverview = () => {
     }
   };
 
-  // Show loading indicator
+  useEffect(() => {
+    socket.on("newBooking", (booking) => {
+      console.log("New Booking:", booking);
+      
+      alert(
+        `🔔 New Booking\n\n${booking.name}\n${booking.problem}`
+      );
+
+  
+      fetchStats();
+    });
+
+    return () => {
+      socket.off("newBooking");
+    };
+  }, []);
+
+  // Show loading indicator 
   if (loading) {
     return (
       <div className="flex items-center gap-2 text-xs font-bold text-text-dark/50">

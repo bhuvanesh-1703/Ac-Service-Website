@@ -57,7 +57,7 @@ router.patch('/:id/status', async (req, res) => {
     return res.status(400).json({ success: false, error: 'Status is required.' });
   }
   try {
-    const app = await JobApplication.findByIdAndUpdate(req.params.id, { status }, { new: true });
+    const app = await JobApplication.findByIdAndUpdate(req.params.id, { status }, { returnDocument: 'after' });
     if (!app) {
       return res.status(404).json({ success: false, error: 'Application not found.' });
     }

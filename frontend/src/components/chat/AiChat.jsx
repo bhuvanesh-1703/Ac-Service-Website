@@ -228,9 +228,11 @@ const AiChat = () => {
               <div className="flex items-center gap-3">
                 {/* Back button on small screen, otherwise business avatar */}
                 <div className="relative">
-                  <div className="w-10 h-10 rounded-full bg-white/20 border border-white/10 flex items-center justify-center font-bold text-lg text-white select-none">
-                    V&V
-                  </div>
+                  <img
+                    src="/ai_agent_avatar.png"
+                    alt="AI Agent"
+                    className="w-10 h-10 rounded-full object-cover border border-white/10"
+                  />
                   {/* Active online indicator dot */}
                   <span className="absolute bottom-0 right-0 w-3 h-3 bg-[#25D366] rounded-full border-2 border-[#008069]"></span>
                 </div>
@@ -238,7 +240,7 @@ const AiChat = () => {
                 <div className="flex flex-col">
                   <div className="flex items-center gap-1">
                     <span className="font-semibold text-sm tracking-wide">
-                      V&V Support
+                      V&V Support AI
                     </span>
                     {/* WhatsApp Verified Badge SVG */}
                     <svg
@@ -390,9 +392,7 @@ const AiChat = () => {
               onSubmit={handleFormSubmit}
               className="flex items-center gap-2 px-3 py-2.5 bg-[#f0f2f5] border-t border-gray-200 relative z-10"
             >
-              {/* Left Utilities */}
 
-              {/* Text Area Input */}
               <input
                 type="text"
                 value={message}

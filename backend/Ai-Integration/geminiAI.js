@@ -1,6 +1,7 @@
 const { GoogleGenAI } = require("@google/genai");
 const JobApplication = require("../models/JobApplication");
 const Booking = require("../models/Booking");
+const { sendBookingConfirmation, sendTechnicianAlert } = require("../utils/smsService");
 
 const AI = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
@@ -179,6 +180,7 @@ Rules:
       data.problem
     ) {
       let assignedTech = "System Assigned";
+      let techPhone = null;
 
       if (data.category && data.category !== "other") {
         // Find hired technician with matching specialization
@@ -188,6 +190,7 @@ Rules:
         });
         if (tech) {
           assignedTech = tech.fullName;
+          techPhone = tech.phone;
         }
       }
 
@@ -201,6 +204,14 @@ Rules:
         status: "assigned",
       });
       await newBooking.save();
+
+      // Fire Twilio WhatsApp/SMS to CUSTOMER
+      sendBookingConfirmation(data.phone, data.name, assignedTech, data.problem);
+
+      // Fire Twilio WhatsApp/SMS to TECHNICIAN (if found)
+      if (techPhone) {
+        sendTechnicianAlert(techPhone, assignedTech, data.name, data.phone, data.problem, data.address);
+      }
 
       // Append confirmation text to response
       aiResponseText += `\n\n📅 **Booking Confirmed!**\n- **Name:** ${data.name}\n- **Phone:** ${data.phone}\n- **Address:** ${data.address}\n- **Assigned Technician:** ${assignedTech}\n\nOur coordinator will call you shortly to confirm the schedule. Thank you!`;

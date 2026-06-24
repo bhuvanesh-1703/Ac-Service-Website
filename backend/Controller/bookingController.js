@@ -1,11 +1,22 @@
 const Booking = require('../models/Booking');
-
+const {getIo} = require('../Socket/socket');
 const createBooking = async (req, res) => {
     try {
         const { name, phone, address, problem } = req.body;
         const newBooking = new Booking({ name, phone, address, problem });
         await newBooking.save();
-        res.status(201).json({ success: true, booking: newBooking, data: newBooking });
+
+        const io =getIo();
+        io.emit("newBooking",{_id:newBooking._id,
+            name:newBooking.name,
+            phone:newBooking.phone,
+            address:newBooking.address,
+            problem:newBooking.problem,
+            status:newBooking.status,
+            createdAt:newBooking.createdAt,
+            updatedAt:newBooking.updatedAt
+        })
+        res.status(201).json({ success: true, message:"Booking created successfully!", data: newBooking });
     } catch (err) {
         console.error('Booking create error:', err);
         res.status(500).json({ success: false, error: 'Failed to create booking.' });
@@ -36,7 +47,7 @@ const updateBooking = async (req, res) => {
     try {
         const { id } = req.params;
         const updates = req.body;
-        const updatedBooking = await Booking.findByIdAndUpdate(id, updates, { new: true });
+        const updatedBooking = await Booking.findByIdAndUpdate(id, updates, { returnDocument: 'after' });
         res.status(200).json({ success: true, booking: updatedBooking });
     } catch (error) {
         console.error('Booking update error:', error);
