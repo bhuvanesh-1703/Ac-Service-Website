@@ -120,98 +120,22 @@ const HeroSection = () => {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          initial={{ opacity: 0, scale: 0.95, y: 10 }}
+          animate={{ opacity: 1, scale: 1, y: [-5, 5, -5] }}
+          transition={{ 
+            opacity: { duration: 0.8, ease: "easeOut" },
+            scale: { duration: 0.8, ease: "easeOut" },
+            y: { repeat: Infinity, duration: 6, ease: "easeInOut", delay: 0.8 }
+          }}
           className="lg:col-span-5 relative w-full flex items-center justify-center"
         >
-          <div className="relative w-full max-w-md aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border border-border-subtle group">
+          <div className="relative w-full max-w-md aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border border-border-subtle">
             {/* Main Visual Image */}
             <img
               src="/ac_service_hero.png"
               alt="Professional AC Service Technician"
-              className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+              className="w-full h-full object-cover"
             />
-
-            {/* Floating Card 1: Bottom Right - Fast & Reliable */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.6, duration: 0.5 }}
-              className="animate-float flex items-center gap-3 bg-card-bg/80 backdrop-blur-xl px-4 py-3 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.5)] border border-white/10 absolute bottom-6 right-[-20px] z-10 max-w-[220px]"
-            >
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-secondary-yellow/20 to-secondary-yellow/5 text-secondary-yellow flex items-center justify-center shadow-inner border border-secondary-yellow/20">
-                <FiShield className="w-5 h-5 stroke-[2]" />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-xs font-black text-white tracking-tight">
-                  Fast & Reliable
-                </span>
-                <span className="text-[10px] text-white/60 font-bold mt-0.5 uppercase tracking-wider">
-                  AC Service
-                </span>
-              </div>
-            </motion.div>
-
-            {/* Floating Card 2: Top Left - 90-Day Warranty */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.8, duration: 0.5 }}
-              className="animate-float-delayed flex items-center gap-3 bg-card-bg/80 backdrop-blur-xl px-4 py-3 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.5)] border border-white/10 absolute top-8 left-[-30px] z-10 max-w-[220px]"
-            >
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-maroon/40 to-primary-maroon/10 text-white flex items-center justify-center shadow-inner border border-white/10">
-                <FiCheckCircle className="w-5 h-5 stroke-[2]" />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-xs font-black text-white tracking-tight">
-                  90-Day Warranty
-                </span>
-                <span className="text-[10px] text-white/60 font-bold mt-0.5 uppercase tracking-wider">
-                  Guaranteed
-                </span>
-              </div>
-            </motion.div>
-
-            {/* Floating Card 3: Bottom Left - Verified Technician */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.0, duration: 0.5 }}
-              className="animate-float flex items-center gap-3 bg-card-bg/80 backdrop-blur-xl px-4 py-3 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.5)] border border-white/10 absolute bottom-24 left-[-40px] z-10 max-w-[220px]"
-            >
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500/20 to-blue-500/5 text-blue-400 flex items-center justify-center shadow-inner border border-blue-500/20">
-                <FiStar className="w-5 h-5 stroke-[2] fill-blue-500/20" />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-xs font-black text-white tracking-tight">
-                  Verified Tech
-                </span>
-                <span className="text-[10px] text-white/60 font-bold mt-0.5 uppercase tracking-wider">
-                  5-Star Rated
-                </span>
-              </div>
-            </motion.div>
-
-            {/* Floating Card 4: Top Right - 24/7 Support */}
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.2, duration: 0.5 }}
-              className="animate-float-delayed flex items-center gap-3 bg-card-bg/80 backdrop-blur-xl px-4 py-3 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.5)] border border-white/10 absolute top-28 right-[-25px] z-10 max-w-[220px]"
-            >
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-green-500/20 to-green-500/5 text-green-400 flex items-center justify-center shadow-inner border border-green-500/20">
-                <FiPhoneCall className="w-5 h-5 stroke-[2]" />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-xs font-black text-white tracking-tight">
-                  24/7 Support
-                </span>
-                <span className="text-[10px] text-white/60 font-bold mt-0.5 uppercase tracking-wider">
-                  Always Available
-                </span>
-              </div>
-            </motion.div>
           </div>
         </motion.div>
       </div>
