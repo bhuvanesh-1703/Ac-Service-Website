@@ -1,24 +1,32 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import axios from 'axios';
-import { 
-  FaWhatsapp, 
-  FaPaperPlane, 
-  FaMicrophone, 
-  FaEllipsisV, 
-  FaCheckDouble, 
-  FaSmile, 
-  FaPaperclip, 
+import React, { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import axios from "axios";
+import {
+  FaWhatsapp,
+  FaPaperPlane,
+  FaMicrophone,
+  FaEllipsisV,
+  FaCheckDouble,
+  FaSmile,
+  FaPaperclip,
   FaTrashAlt,
-  FaArrowLeft
-} from 'react-icons/fa';
-import { IoClose } from 'react-icons/io5';
+  FaArrowLeft,
+} from "react-icons/fa";
+import { IoClose } from "react-icons/io5";
 
 // Default welcome message
 const WELCOME_MESSAGE = {
-  role: 'model',
-  parts: [{ text: "Hello! Welcome to V&V Services support. 🛠️\n\nI can help you with AC installation, Refrigerator repair, Washing Machine servicing, and RO Water Purifier maintenance.\n\nHow can I assist you today?" }],
-  timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })
+  role: "model",
+  parts: [
+    {
+      text: "Hello! Welcome to V&V Services support. 🛠️\n\nI can help you with AC installation, Refrigerator repair, Washing Machine servicing, and RO Water Purifier maintenance.\n\nHow can I assist you today?",
+    },
+  ],
+  timestamp: new Date().toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+  }),
 };
 
 // Starter questions to help users instantly
@@ -26,23 +34,23 @@ const STARTER_QUESTIONS = [
   "❄️ Book an AC Service",
   "💰 Check Repair Price List",
   "⏰ What are your working hours?",
-  "📞 Get customer helpline number"
+  "📞 Get customer helpline number",
 ];
 
 const AiChat = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
   const [chatHistory, setChatHistory] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [hasUnread, setHasUnread] = useState(false);
-  
+
   const messagesEndRef = useRef(null);
   const menuRef = useRef(null);
 
   // Initialize and load chat from local storage
   useEffect(() => {
-    const savedChat = localStorage.getItem('vv_services_chat_history');
+    const savedChat = localStorage.getItem("vv_services_chat_history");
     if (savedChat) {
       setChatHistory(JSON.parse(savedChat));
     } else {
@@ -55,13 +63,13 @@ const AiChat = () => {
   // Save chat history to localStorage
   const saveChatHistory = (history) => {
     setChatHistory(history);
-    localStorage.setItem('vv_services_chat_history', JSON.stringify(history));
+    localStorage.setItem("vv_services_chat_history", JSON.stringify(history));
   };
 
   // Scroll to bottom whenever messages or loading state changes
   useEffect(() => {
     if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [chatHistory, loading, isOpen]);
 
@@ -72,18 +80,8 @@ const AiChat = () => {
         setShowMenu(false);
       }
     };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
-
-  // Listen for custom event to open chat from anywhere
-  useEffect(() => {
-    const handleOpenAiChat = () => {
-      setIsOpen(true);
-      setHasUnread(false);
-    };
-    window.addEventListener('open-ai-chat', handleOpenAiChat);
-    return () => window.removeEventListener('open-ai-chat', handleOpenAiChat);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   // Open Chat Handler
@@ -96,49 +94,65 @@ const AiChat = () => {
   const sendMessageToAi = async (textToSend) => {
     if (!textToSend.trim()) return;
 
-    const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
-    
+    const timestamp = new Date().toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    });
+
     // Create new history with user message
     const userMessage = {
-      role: 'user',
+      role: "user",
       parts: [{ text: textToSend }],
-      timestamp
+      timestamp,
     };
-    
+
     const updatedHistory = [...chatHistory, userMessage];
     saveChatHistory(updatedHistory);
-    setMessage('');
+    setMessage("");
     setLoading(true);
 
     try {
       // Map history to format expected by GoogleGenAI SDK (only role and parts)
-      const formattedHistory = updatedHistory.map(msg => ({
+      const formattedHistory = updatedHistory.map((msg) => ({
         role: msg.role,
-        parts: msg.parts.map(part => ({ text: part.text }))
+        parts: msg.parts.map((part) => ({ text: part.text })),
       }));
 
-      const res = await axios.post('http://localhost:5100/api/ai/chat', {
+      const res = await axios.post("http://localhost:5100/api/ai/chat", {
         message: textToSend,
-        history: formattedHistory
+        history: formattedHistory,
       });
 
       if (res.data && res.data.success) {
         const aiMessage = {
-          role: 'model',
+          role: "model",
           parts: [{ text: res.data.response }],
-          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })
+          timestamp: new Date().toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: true,
+          }),
         };
         saveChatHistory([...updatedHistory, aiMessage]);
       } else {
-        throw new Error(res.data.error || 'Server error occurred');
+        throw new Error(res.data.error || "Server error occurred");
       }
     } catch (error) {
       console.error("Chat API Error:", error);
       const errorMessage = {
-        role: 'model',
-        parts: [{ text: "Sorry, I am facing trouble connecting to my brain right now. Please try again in a moment, or contact us directly at +91 63740 09568. 📞" }],
-        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true }),
-        isError: true
+        role: "model",
+        parts: [
+          {
+            text: "Sorry, I am facing trouble connecting to my brain right now. Please try again in a moment, or contact us directly at +91 63740 09568. 📞",
+          },
+        ],
+        timestamp: new Date().toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: true,
+        }),
+        isError: true,
       };
       saveChatHistory([...updatedHistory, errorMessage]);
     } finally {
@@ -153,7 +167,10 @@ const AiChat = () => {
 
   const handleStarterQuestionClick = (question) => {
     // Strip emoji prefix from query before sending to AI
-    const cleanedText = question.replace(/^[\uD800-\uDBFF\uDC00-\uDFFF\u2600-\u27BF]\s*/, '');
+    const cleanedText = question.replace(
+      /^[\uD800-\uDBFF\uDC00-\uDFFF\u2600-\u27BF]\s*/,
+      "",
+    );
     sendMessageToAi(cleanedText);
   };
 
@@ -165,6 +182,32 @@ const AiChat = () => {
 
   return (
     <>
+      {/* 1. FLOATING LAUNCHER BUTTON */}
+      <div className="fixed bottom-6 right-6 z-50 flex items-center justify-center">
+        <button
+          onClick={isOpen ? () => setIsOpen(false) : handleOpenChat}
+          className="relative flex items-center justify-center w-14 h-14 rounded-full bg-[#25D366] hover:bg-[#20ba5a] text-white shadow-xl shadow-black/20 hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer focus:outline-none"
+          aria-label="Toggle WhatsApp Chat"
+          id="btn-whatsapp-chat"
+        >
+          {isOpen ? (
+            <IoClose className="w-7 h-7 transition-transform duration-200 rotate-0" />
+          ) : (
+            <FaWhatsapp className="w-8 h-8 transition-transform duration-200 hover:rotate-12" />
+          )}
+
+          {/* Pulse notification badge if unread and closed */}
+          {hasUnread && !isOpen && (
+            <span className="absolute -top-1.5 -right-1.5 flex h-5 w-5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-5 w-5 bg-red-500 text-[10px] text-white font-bold items-center justify-center">
+                1
+              </span>
+            </span>
+          )}
+        </button>
+      </div>
+
       {/* 2. CHAT PANEL WIDGET */}
       <AnimatePresence>
         {isOpen && (
@@ -172,12 +215,12 @@ const AiChat = () => {
             initial={{ opacity: 0, y: 50, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 50, scale: 0.9 }}
-            transition={{ type: 'spring', damping: 25, stiffness: 220 }}
+            transition={{ type: "spring", damping: 25, stiffness: 220 }}
             className="fixed bottom-24 right-6 z-50 flex flex-col w-[360px] md:w-[400px] h-[580px] max-h-[calc(100vh-120px)] max-w-[calc(100vw-32px)] bg-[#efeae2] rounded-2xl overflow-hidden shadow-2xl shadow-black/30 border border-black/5"
             style={{
               backgroundImage: `url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png')`,
-              backgroundBlendMode: 'overlay',
-              backgroundColor: '#efeae2'
+              backgroundBlendMode: "overlay",
+              backgroundColor: "#efeae2",
             }}
           >
             {/* A. HEADER SECTION */}
@@ -194,13 +237,20 @@ const AiChat = () => {
 
                 <div className="flex flex-col">
                   <div className="flex items-center gap-1">
-                    <span className="font-semibold text-sm tracking-wide">V&V Support</span>
+                    <span className="font-semibold text-sm tracking-wide">
+                      V&V Support
+                    </span>
                     {/* WhatsApp Verified Badge SVG */}
-                    <svg className="w-4 h-4 text-[#25D366] fill-current" viewBox="0 0 24 24">
+                    <svg
+                      className="w-4 h-4 text-[#25D366] fill-current"
+                      viewBox="0 0 24 24"
+                    >
                       <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
                     </svg>
                   </div>
-                  <span className="text-[11px] text-white/85">Typically replies instantly</span>
+                  <span className="text-[11px] text-white/85">
+                    Typically replies instantly
+                  </span>
                 </div>
               </div>
 
@@ -247,38 +297,39 @@ const AiChat = () => {
             <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3 flex flex-col scrollbar-thin">
               {/* WhatsApp System Encrypted Text Notice */}
               <div className="self-center bg-[#ffe596]/80 text-[#303030] text-[11px] px-3 py-1.5 rounded-lg text-center max-w-[85%] shadow-sm leading-relaxed select-none mb-1.5 border border-yellow-200/20">
-                🔒 Messages are AI-assisted and securely processed. Your chat history is saved locally.
+                🔒 Messages are AI-assisted and securely processed. Your chat
+                history is saved locally.
               </div>
 
               {/* Message bubbles list */}
               {chatHistory.map((msg, index) => {
-                const isUser = msg.role === 'user';
+                const isUser = msg.role === "user";
                 return (
                   <div
                     key={index}
-                    className={`flex flex-col max-w-[82%] ${isUser ? 'self-end items-end' : 'self-start items-start'}`}
+                    className={`flex flex-col max-w-[82%] ${isUser ? "self-end items-end" : "self-start items-start"}`}
                   >
                     {/* Chat Bubble */}
                     <div
                       className={`relative px-3.5 py-2 shadow-md ${
-                        isUser 
-                          ? 'bg-[#d9fdd3] text-gray-900 rounded-2xl rounded-tr-none' 
-                          : msg.isError 
-                            ? 'bg-red-50 text-red-900 border border-red-200 rounded-2xl rounded-tl-none'
-                            : 'bg-white text-gray-900 rounded-2xl rounded-tl-none'
+                        isUser
+                          ? "bg-[#d9fdd3] text-gray-900 rounded-2xl rounded-tr-none"
+                          : msg.isError
+                            ? "bg-red-50 text-red-900 border border-red-200 rounded-2xl rounded-tl-none"
+                            : "bg-white text-gray-900 rounded-2xl rounded-tl-none"
                       }`}
                     >
                       {/* Tail styling */}
                       <span
                         className={`absolute top-0 w-3 h-3 ${
-                          isUser 
-                            ? 'right-[-6px] text-[#d9fdd3] fill-current border-t-[8px] border-t-current border-r-[8px] border-r-transparent' 
+                          isUser
+                            ? "right-[-6px] text-[#d9fdd3] fill-current border-t-[8px] border-t-current border-r-[8px] border-r-transparent"
                             : msg.isError
-                              ? 'left-[-6px] text-red-50 fill-current border-t-[8px] border-t-current border-l-[8px] border-l-transparent'
-                              : 'left-[-6px] text-white fill-current border-t-[8px] border-t-current border-l-[8px] border-l-transparent'
+                              ? "left-[-6px] text-red-50 fill-current border-t-[8px] border-t-current border-l-[8px] border-l-transparent"
+                              : "left-[-6px] text-white fill-current border-t-[8px] border-t-current border-l-[8px] border-l-transparent"
                         }`}
                       />
-                      
+
                       {/* Message content text */}
                       <p className="text-[13.5px] leading-relaxed whitespace-pre-line select-text">
                         {msg.parts[0].text}
@@ -287,10 +338,18 @@ const AiChat = () => {
                       {/* Bubble footer with timestamp / double blue checkmark */}
                       <div className="flex items-center justify-end gap-1.5 mt-1.5 select-none">
                         <span className="text-[9.5px] text-gray-500/80">
-                          {msg.timestamp || new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true })}
+                          {msg.timestamp ||
+                            new Date().toLocaleTimeString([], {
+                              hour: "2-digit",
+                              minute: "2-digit",
+                              hour12: true,
+                            })}
                         </span>
                         {isUser && (
-                          <FaCheckDouble className="w-3.5 h-3.5 text-[#53bdeb]" title="Read" />
+                          <FaCheckDouble
+                            className="w-3.5 h-3.5 text-[#53bdeb]"
+                            title="Read"
+                          />
                         )}
                       </div>
                     </div>
@@ -304,16 +363,25 @@ const AiChat = () => {
                   <div className="relative px-4 py-3 bg-white shadow-md rounded-2xl rounded-tl-none">
                     {/* Tail styling */}
                     <span className="absolute top-0 left-[-6px] text-white fill-current border-t-[8px] border-t-current border-l-[8px] border-l-transparent" />
-                    
+
                     <div className="flex items-center gap-1.5 py-1 px-0.5">
-                      <span className="w-2.5 h-2.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
-                      <span className="w-2.5 h-2.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
-                      <span className="w-2.5 h-2.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
+                      <span
+                        className="w-2.5 h-2.5 bg-gray-400 rounded-full animate-bounce"
+                        style={{ animationDelay: "0ms" }}
+                      ></span>
+                      <span
+                        className="w-2.5 h-2.5 bg-gray-400 rounded-full animate-bounce"
+                        style={{ animationDelay: "150ms" }}
+                      ></span>
+                      <span
+                        className="w-2.5 h-2.5 bg-gray-400 rounded-full animate-bounce"
+                        style={{ animationDelay: "300ms" }}
+                      ></span>
                     </div>
                   </div>
                 </div>
               )}
-              
+
               <div ref={messagesEndRef} />
             </div>
 
@@ -323,7 +391,6 @@ const AiChat = () => {
               className="flex items-center gap-2 px-3 py-2.5 bg-[#f0f2f5] border-t border-gray-200 relative z-10"
             >
               {/* Left Utilities */}
-            
 
               {/* Text Area Input */}
               <input
@@ -340,16 +407,16 @@ const AiChat = () => {
                 type="submit"
                 disabled={loading || !message.trim()}
                 className={`flex items-center justify-center w-9.5 h-9.5 rounded-full shadow-md text-white transition-all focus:outline-none cursor-pointer ${
-                  message.trim() 
-                    ? 'bg-[#008069] hover:bg-[#005a49] active:scale-95' 
-                    : 'bg-gray-400/90 cursor-default'
+                  message.trim()
+                    ? "bg-[#008069] hover:bg-[#005a49] active:scale-95"
+                    : "bg-gray-400/90 cursor-default"
                 }`}
                 aria-label="Send Message"
               >
                 {message.trim() ? (
                   <FaPaperPlane className="w-3.5 h-3.5 translate-x-[1px]" />
                 ) : (
-                  <FaPaperPlane className="w-4.5 h-4.5"  /> 
+                  <FaPaperPlane className="w-4.5 h-4.5" />
                 )}
               </button>
             </form>
