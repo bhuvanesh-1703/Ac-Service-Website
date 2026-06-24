@@ -113,7 +113,7 @@ const Register = () => {
                   className={`block w-full pl-11 pr-4 py-3 border ${
                     errors.username ? "border-red-500/50 focus:ring-red-500/30 focus:border-red-500/50" : "border-border-subtle focus:ring-primary-maroon/30 focus:border-primary-maroon/40"
                   } rounded-2xl focus:outline-none focus:ring-2 text-sm text-text-dark placeholder-text-dark/30 bg-bg-ivory transition-all`}
-                  placeholder="john_doe"
+                  placeholder="Enter your username"
                 />
               </div>
               {errors.username && (
@@ -141,7 +141,7 @@ const Register = () => {
                   className={`block w-full pl-11 pr-4 py-3 border ${
                     errors.email ? "border-red-500/50 focus:ring-red-500/30 focus:border-red-500/50" : "border-border-subtle focus:ring-primary-maroon/30 focus:border-primary-maroon/40"
                   } rounded-2xl focus:outline-none focus:ring-2 text-sm text-text-dark placeholder-text-dark/30 bg-bg-ivory transition-all`}
-                  placeholder="john@example.com"
+                  placeholder="Enter your email"
                 />
               </div>
               {errors.email && (

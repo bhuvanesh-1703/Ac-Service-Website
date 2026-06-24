@@ -97,7 +97,7 @@ const Login = () => {
                   value={data.email}
                   onChange={onChangeHandler}
                   className="block w-full pl-11 pr-4 py-3 border border-border-subtle rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary-maroon/30 focus:border-primary-maroon/40 text-sm text-text-dark placeholder-text-dark/30 bg-bg-ivory transition-all"
-                  placeholder="name@example.com"
+                  placeholder="Enter your email"
                 />
               </div>
             </div>
