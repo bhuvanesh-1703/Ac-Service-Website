@@ -76,6 +76,16 @@ const AiChat = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  // Listen for custom event to open chat from anywhere
+  useEffect(() => {
+    const handleOpenAiChat = () => {
+      setIsOpen(true);
+      setHasUnread(false);
+    };
+    window.addEventListener('open-ai-chat', handleOpenAiChat);
+    return () => window.removeEventListener('open-ai-chat', handleOpenAiChat);
+  }, []);
+
   // Open Chat Handler
   const handleOpenChat = () => {
     setIsOpen(true);
@@ -155,32 +165,6 @@ const AiChat = () => {
 
   return (
     <>
-      {/* 1. FLOATING LAUNCHER BUTTON */}
-      <div className="fixed bottom-6 right-6 z-50 flex items-center justify-center">
-        <button
-          onClick={isOpen ? () => setIsOpen(false) : handleOpenChat}
-          className="relative flex items-center justify-center w-14 h-14 rounded-full bg-[#25D366] hover:bg-[#20ba5a] text-white shadow-xl shadow-black/20 hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer focus:outline-none"
-          aria-label="Toggle WhatsApp Chat"
-          id="btn-whatsapp-chat"
-        >
-          {isOpen ? (
-            <IoClose className="w-7 h-7 transition-transform duration-200 rotate-0" />
-          ) : (
-            <FaWhatsapp className="w-8 h-8 transition-transform duration-200 hover:rotate-12" />
-          )}
-
-          {/* Pulse notification badge if unread and closed */}
-          {hasUnread && !isOpen && (
-            <span className="absolute -top-1.5 -right-1.5 flex h-5 w-5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-5 w-5 bg-red-500 text-[10px] text-white font-bold items-center justify-center">
-                1
-              </span>
-            </span>
-          )}
-        </button>
-      </div>
-
       {/* 2. CHAT PANEL WIDGET */}
       <AnimatePresence>
         {isOpen && (

@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FiPhoneCall, FiArrowRight, FiShield, FiSettings } from "react-icons/fi";
+import { FiPhoneCall, FiArrowRight, FiShield, FiSettings, FiMessageSquare } from "react-icons/fi";
 import SideRays from "../components/SideRays";
 
 const HeroSection = () => {
@@ -102,6 +102,23 @@ const HeroSection = () => {
           >
             <span className="text-secondary-yellow font-black text-sm">⭐ 4.9</span>
             <span className="text-white/60 text-[10px] font-bold tracking-widest uppercase border-l border-white/20 pl-3">Top Rated</span>
+          </motion.div>
+
+          {/* AI Assistant CTA Card */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.4, type: "spring" }}
+            onClick={() => window.dispatchEvent(new Event('open-ai-chat'))}
+            className="absolute -bottom-8 lg:-bottom-12 left-1/2 -translate-x-1/2 z-40 bg-[#0A0A0A]/90 backdrop-blur-xl border border-secondary-yellow/30 px-5 py-3 rounded-2xl flex items-center gap-4 shadow-[0_10px_30px_rgba(199,167,108,0.15)] w-max cursor-pointer group hover:border-secondary-yellow/60 transition-colors"
+          >
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-secondary-yellow to-secondary-yellow-dark flex items-center justify-center shadow-lg shrink-0 group-hover:scale-110 transition-transform">
+               <FiMessageSquare className="w-5 h-5 text-black" />
+            </div>
+            <div className="flex flex-col items-start pr-2">
+               <span className="text-white font-bold text-sm tracking-wide">AI Service Assistant</span>
+               <span className="text-secondary-yellow text-[10px] font-bold uppercase tracking-widest mt-0.5 group-hover:text-white transition-colors">
+                 Start Chat &rarr;
+               </span>
+            </div>
           </motion.div>
 
         </div>
