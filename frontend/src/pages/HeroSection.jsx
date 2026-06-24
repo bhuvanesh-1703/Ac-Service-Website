@@ -36,7 +36,7 @@ const HeroSection = () => {
 
           <motion.p 
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-lg sm:text-xl text-white/50 font-light max-w-md mb-10 leading-relaxed"
+            className="text-lg sm:text-xl text-white/80 font-light max-w-md mb-10 leading-relaxed"
           >
             We bring expert, transparent, and ultra-fast appliance repair directly to your doorstep. Backed by a flawless 90-day warranty.
           </motion.p>
@@ -45,11 +45,11 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.3 }}
             className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
           >
-            <a href="#contact" className="group flex items-center justify-center gap-3 px-10 py-4 bg-white text-black rounded-full font-bold text-xs uppercase tracking-widest transition-all hover:bg-secondary-yellow hover:scale-105 shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+            <a href="#contact" className="group flex items-center justify-center gap-3 pl-10 pr-12 py-4 bg-white text-black rounded-full font-bold text-xs uppercase tracking-widest transition-all hover:bg-secondary-yellow hover:scale-105 shadow-[0_0_20px_rgba(255,255,255,0.1)]">
               Book Service <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </a>
-            <a href="tel:+916374009568" className="flex items-center justify-center gap-3 px-10 py-4 rounded-full border border-white/20 text-white font-bold text-xs uppercase tracking-widest hover:bg-white/10 transition-colors">
-              <FiPhoneCall className="w-4 h-4 text-secondary-yellow" /> Call Now
+            <a href="tel:+916374009568" className="flex items-center justify-center gap-3 px-10 py-4 rounded-full border border-white/40 text-secondary-yellow font-bold text-xs uppercase tracking-widest hover:bg-white/10 hover:text-white transition-colors">
+              <FiPhoneCall className="w-4 h-4" /> Call Now
             </a>
           </motion.div>
         </div>
