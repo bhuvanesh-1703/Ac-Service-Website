@@ -107,18 +107,26 @@ const HeroSection = () => {
           {/* AI Assistant CTA Card */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.4, type: "spring" }}
-            onClick={() => window.dispatchEvent(new Event('open-ai-chat'))}
-            className="absolute -bottom-8 lg:-bottom-12 left-1/2 -translate-x-1/2 z-40 bg-[#0A0A0A]/90 backdrop-blur-xl border border-secondary-yellow/30 px-5 py-3 rounded-2xl flex items-center gap-4 shadow-[0_10px_30px_rgba(199,167,108,0.15)] w-max cursor-pointer group hover:border-secondary-yellow/60 transition-colors"
+            className="absolute -bottom-12 lg:-bottom-16 left-1/2 -translate-x-1/2 z-40 bg-[#0A0A0A]/95 backdrop-blur-2xl border border-white/10 px-6 py-5 rounded-2xl flex flex-col items-start shadow-[0_20px_50px_rgba(0,0,0,0.9)] w-[260px] group transition-all hover:border-secondary-yellow/40"
           >
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-secondary-yellow to-secondary-yellow-dark flex items-center justify-center shadow-lg shrink-0 group-hover:scale-110 transition-transform">
-               <FiMessageSquare className="w-5 h-5 text-black" />
-            </div>
-            <div className="flex flex-col items-start pr-2">
+            {/* Header: Icon + Title */}
+            <div className="flex items-center gap-2 mb-2">
+               <span className="text-lg">🤖</span>
                <span className="text-white font-bold text-sm tracking-wide">AI Service Assistant</span>
-               <span className="text-secondary-yellow text-[10px] font-bold uppercase tracking-widest mt-0.5 group-hover:text-white transition-colors">
-                 Start Chat &rarr;
-               </span>
             </div>
+            
+            {/* Body Text */}
+            <p className="text-white/60 text-[11px] leading-relaxed mb-4">
+              Ask about AC, Fridge, Washing Machine & RO
+            </p>
+
+            {/* Button */}
+            <button 
+              onClick={() => window.dispatchEvent(new Event('open-ai-chat'))}
+              className="w-full py-2.5 rounded-lg bg-white/5 border border-white/10 text-white text-xs font-bold hover:bg-secondary-yellow hover:text-black hover:border-secondary-yellow transition-all"
+            >
+              Start Chat
+            </button>
           </motion.div>
 
         </div>
