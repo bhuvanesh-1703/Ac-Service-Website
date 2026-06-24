@@ -6,7 +6,7 @@ const cors = require('cors')
 const connectDB=require('./DB/db_connection')
 const aiRouter=require('./Routes/aiRoute')
 const careerRouter=require('./Routes/careerRoute')
-const bookingRouter=require('./routes/bookingRoute')
+const bookingRouter=require('./Routes/bookingRoute')
 const authRouter=require("./Routes/authRoute")
 
 
