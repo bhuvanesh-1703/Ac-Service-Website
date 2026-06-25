@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet, useLocation } from "react-router-dom";
-import Sidebar from "../admin/Sidebar";
-import Header from "../admin/Header";
+import Sidebar from "../Admin/Sidebar";
+import Header from "../Admin/Header";
 import Adminlogin from "../validation/Login";
 
 const AdminLayout = ({ onLogout }) => {

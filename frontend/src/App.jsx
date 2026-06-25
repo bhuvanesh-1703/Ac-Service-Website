@@ -17,11 +17,11 @@ import AiChat from "./components/chat/AiChat";
 
 // Admin Layout & Pages
 import AdminLayout from "./Layout/AdminLayout.jsx";
-import DashboardOverview from "./admin/DashboardOverview.jsx";
-import BookingsTable from "./admin/BookingsTable.jsx";
-import JobApplicationsTable from "./admin/JobApplicationsTable.jsx";
-import ProductTable from "./admin/ProductTable.jsx";
-import SettingsView from "./admin/SettingsView.jsx";
+import DashboardOverview from "./Admin/DashboardOverview.jsx";
+import BookingsTable from "./Admin/BookingsTable.jsx";
+import JobApplicationsTable from "./Admin/JobApplicationsTable.jsx";
+import ProductTable from "./Admin/ProductTable.jsx";
+import SettingsView from "./Admin/SettingsView.jsx";
 
 import { FiArrowUp } from "react-icons/fi";
 import { AnimatePresence, motion } from "framer-motion";
